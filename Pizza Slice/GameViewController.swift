@@ -28,8 +28,8 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
         
         let scene = GameScene(size: self.view.frame.size)
         let skView = self.view as SKView
-        skView.showsFPS = true
-        skView.showsNodeCount = true
+        //skView.showsFPS = true
+        //skView.showsNodeCount = true
         //scene.scaleMode = .AspectFill
         self.rotater.addTarget(scene, action: "handleRotate:")
         self.view.addGestureRecognizer(self.rotater)
