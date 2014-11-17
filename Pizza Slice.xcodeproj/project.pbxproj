@@ -21,8 +21,7 @@
 		D9361CB119F2345500574A06 /* eat.caf in Resources */ = {isa = PBXBuildFile; fileRef = D9361CB019F2345500574A06 /* eat.caf */; };
 		D9361CB319F2366F00574A06 /* plane.png in Resources */ = {isa = PBXBuildFile; fileRef = D9361CB219F2366F00574A06 /* plane.png */; };
 		D9361CB719F23C3100574A06 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D9361CB619F23C3100574A06 /* background.jpg */; };
-		D99F995719F4959000438BC3 /* howto.png in Resources */ = {isa = PBXBuildFile; fileRef = D99F995519F4959000438BC3 /* howto.png */; };
-		D99F995819F4959000438BC3 /* howto2.png in Resources */ = {isa = PBXBuildFile; fileRef = D99F995619F4959000438BC3 /* howto2.png */; };
+		D982941619F4B00B002AB910 /* howto.png in Resources */ = {isa = PBXBuildFile; fileRef = D982941519F4B00B002AB910 /* howto.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,8 +53,7 @@
 		D9361CB019F2345500574A06 /* eat.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = eat.caf; sourceTree = "<group>"; };
 		D9361CB219F2366F00574A06 /* plane.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plane.png; sourceTree = "<group>"; };
 		D9361CB619F23C3100574A06 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
-		D99F995519F4959000438BC3 /* howto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = howto.png; sourceTree = "<group>"; };
-		D99F995619F4959000438BC3 /* howto2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = howto2.png; sourceTree = "<group>"; };
+		D982941519F4B00B002AB910 /* howto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = howto.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,8 +105,7 @@
 				D903604E19F1CAE1009584B8 /* LaunchScreen.xib */,
 				D9361CB619F23C3100574A06 /* background.jpg */,
 				D9361CB219F2366F00574A06 /* plane.png */,
-				D99F995519F4959000438BC3 /* howto.png */,
-				D99F995619F4959000438BC3 /* howto2.png */,
+				D982941519F4B00B002AB910 /* howto.png */,
 				D903604119F1CAE1009584B8 /* Supporting Files */,
 			);
 			path = "Pizza Slice";
@@ -231,7 +228,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D99F995819F4959000438BC3 /* howto2.png in Resources */,
 				D934EEEE19F1F5AB003B6EFE /* ccw.caf in Resources */,
 				D934EEF019F1F5AB003B6EFE /* die.caf in Resources */,
 				D903605019F1CAE1009584B8 /* LaunchScreen.xib in Resources */,
@@ -239,7 +235,7 @@
 				D903604D19F1CAE1009584B8 /* Images.xcassets in Resources */,
 				D9361CB119F2345500574A06 /* eat.caf in Resources */,
 				D9361CB719F23C3100574A06 /* background.jpg in Resources */,
-				D99F995719F4959000438BC3 /* howto.png in Resources */,
+				D982941619F4B00B002AB910 /* howto.png in Resources */,
 				D903604B19F1CAE1009584B8 /* Main.storyboard in Resources */,
 				D934EEEF19F1F5AB003B6EFE /* cw.caf in Resources */,
 			);
@@ -387,6 +383,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Pizza Slice/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -398,6 +395,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Pizza Slice/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

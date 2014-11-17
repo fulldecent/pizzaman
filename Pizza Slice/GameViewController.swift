@@ -16,16 +16,13 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
     let rotater = UIRotationGestureRecognizer()
     var adBannerView:ADBannerView!
     
-    // http://stackoverflow.com/q/16796783/300224
-    override func viewWillLayoutSubviews() {
+    override func viewDidLoad() {
         super.viewDidLoad()
-        
-        adBannerView = ADBannerView(frame: CGRect.zeroRect)
-        adBannerView.center = CGPoint(x: adBannerView.center.x, y: view.bounds.size.height - adBannerView.frame.size.height / 2)
+        adBannerView = ADBannerView(adType: ADAdType.Banner)
         adBannerView.delegate = self
-        //adBannerView.hidden = true
+        adBannerView.hidden = true
         view.addSubview(adBannerView)
-        
+
         let scene = GameScene(size: self.view.frame.size)
         let skView = self.view as SKView
         //skView.showsFPS = true
@@ -36,8 +33,10 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
         skView.presentScene(scene)
     }
     
-    override func shouldAutorotate() -> Bool {
-        return true
+    // http://stackoverflow.com/q/16796783/300224
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        adBannerView.center = CGPoint(x: adBannerView.center.x, y: view.bounds.size.height - adBannerView.frame.size.height / 2)
     }
     
     func bannerViewDidLoadAd(banner: ADBannerView!) {

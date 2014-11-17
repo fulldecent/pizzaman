@@ -13,14 +13,15 @@ class GameScene: SKScene, UIGestureRecognizerDelegate {
 
     var pacMan:SKShapeNode!
     var howto:SKSpriteNode!
-    var scoreLabel = SKLabelNode(fontNamed: "American Typewriter")
-    var maxScoreLabel = SKLabelNode(fontNamed: "American Typewriter")
-    var gameOverLabel = SKLabelNode(fontNamed: "American Typewriter")
-    
     var eatSound = SKAction.playSoundFileNamed("eat.caf", waitForCompletion: false)
     var cwSound = SKAction.playSoundFileNamed("cw.caf", waitForCompletion: false)
     var ccwSound = SKAction.playSoundFileNamed("ccw.caf", waitForCompletion: false)
     var dieSound = SKAction.playSoundFileNamed("die.caf", waitForCompletion: false)
+
+    var scoreLabel = SKLabelNode(fontNamed: "American Typewriter")
+    var maxScoreLabel = SKLabelNode(fontNamed: "American Typewriter")
+    var gameOverLabel = SKLabelNode(fontNamed: "American Typewriter")
+    
     
     var viewRadius:CGFloat!
     var pacManRadius:CGFloat!
@@ -69,12 +70,13 @@ class GameScene: SKScene, UIGestureRecognizerDelegate {
         self.howto.size = CGSizeMake(self.viewRadius * 0.2, self.viewRadius * 0.2)
         var actions = NSMutableArray()
         actions.addObject(SKAction.rotateByAngle(CGFloat(-M_PI_2), duration: 0.5))
-        actions.addObject(SKAction.waitForDuration(0.4))
+        actions.addObject(SKAction.waitForDuration(0.5))
         actions.addObject(SKAction.rotateByAngle(CGFloat(+M_PI_2), duration: 0))
         self.howto.runAction(SKAction.repeatActionForever(SKAction.sequence(actions)))
         self.addChild(self.howto)
         
         self.scoreLabel.text = "Score : 0"
+        self.scoreLabel.fontColor = self.colorForScore(self.score)
         self.scoreLabel.name = "scoreLabel"
         self.scoreLabel.fontSize = UIDevice.currentDevice().userInterfaceIdiom == .Pad ? 60 : 30
         self.scoreLabel.zPosition = 10
@@ -94,7 +96,7 @@ class GameScene: SKScene, UIGestureRecognizerDelegate {
         self.gameOverLabel.fontSize = UIDevice.currentDevice().userInterfaceIdiom == .Pad ? 60 : 30
         self.gameOverLabel.zPosition = 9999999
         self.gameOverLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
-        self.gameOverLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - gameOverLabel.frame.height * 3)
+        self.gameOverLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - gameOverLabel.frame.height * 3.5)
         
         var path = CGPathCreateMutable()
         CGPathMoveToPoint(path, nil, 0, 0)
@@ -108,11 +110,12 @@ class GameScene: SKScene, UIGestureRecognizerDelegate {
     
     func startGame() {
         self.howto.removeFromParent()
+        self.score = 0
         self.gameOverLabel.removeFromParent()
         self.maxScoreLabel.removeFromParent()
         self.pacMan.zRotation = 0
+        self.pacMan.fillColor = self.colorForScore(self.score)
         self.addChild(self.pacMan)
-        self.score = 0
         self.scoreLabel.text = "Score : \(self.score)"
         self.scoreLabel.fontColor = self.colorForScore(self.score)
         self.readyToStartNewGame = false
@@ -129,7 +132,7 @@ class GameScene: SKScene, UIGestureRecognizerDelegate {
         
         var maxScore = self.score
         if let savedMaxScore = NSUserDefaults.standardUserDefaults().objectForKey("maxScore") as? NSNumber {
-            maxScore = max(self.score, savedMaxScore)
+            maxScore = max(self.score, Int(savedMaxScore))
         }
         NSUserDefaults.standardUserDefaults().setInteger(maxScore, forKey: "maxScore")
         self.maxScoreLabel.text = "High Score : \(maxScore)"
@@ -203,7 +206,7 @@ class GameScene: SKScene, UIGestureRecognizerDelegate {
     func colorForScore(score:Int) -> SKColor {
         switch score {
         case 0...9:
-            return SKColor.whiteColor()
+            return UIColor(red: 1, green: 1, blue: 0, alpha: 1)
         case 10...19:
             return SKColor.orangeColor()
         case 20...29:
