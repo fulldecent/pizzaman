@@ -12,8 +12,6 @@ import SpriteKit
 import iAd
 
 class GameViewController: UIViewController, ADBannerViewDelegate {
-    
-    let rotater = UIRotationGestureRecognizer()
     var adBannerView:ADBannerView!
     
     override func viewDidLoad() {
@@ -24,12 +22,7 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
         view.addSubview(adBannerView)
 
         let scene = GameScene(size: self.view.frame.size)
-        let skView = self.view as SKView
-        //skView.showsFPS = true
-        //skView.showsNodeCount = true
-        //scene.scaleMode = .AspectFill
-        self.rotater.addTarget(scene, action: "handleRotate:")
-        self.view.addGestureRecognizer(self.rotater)
+        let skView = self.view as! SKView
         skView.presentScene(scene)
     }
     
