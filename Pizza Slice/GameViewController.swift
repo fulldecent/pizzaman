@@ -21,8 +21,9 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
         adBannerView.hidden = true
         view.addSubview(adBannerView)
 
+        let skView = SKView(frame: self.view.frame)
+        self.view.addSubview(skView)
         let scene = GameScene(size: self.view.frame.size)
-        let skView = self.view as! SKView
         skView.presentScene(scene)
     }
     

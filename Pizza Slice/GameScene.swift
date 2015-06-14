@@ -22,6 +22,7 @@ class GameScene: SKScene {
     let maxScoreLabel = SKLabelNode(fontNamed: "American Typewriter")
     let gameOverLabel = SKLabelNode(fontNamed: "American Typewriter")
     let achievementLabel = SKLabelNode(fontNamed: "American Typewriter")
+    let shareButton = SKSpriteNode(imageNamed: "share")
     
     let pacManArc = M_PI * 0.4
     var viewRadius:CGFloat!
@@ -47,7 +48,7 @@ class GameScene: SKScene {
         
         //        self.howto = SKSpriteNode(imageNamed: "howto")
         self.howto.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
-        self.howto.size = CGSizeMake(self.viewRadius * 0.2, self.viewRadius * 0.2)
+        self.howto.size = CGSizeMake(self.viewRadius * 0.4, self.viewRadius * 0.4)
         var actions = [SKAction]()
         actions.append(SKAction.rotateByAngle(CGFloat(-M_PI_2), duration: 0.5))
         actions.append(SKAction.waitForDuration(0.5))
@@ -75,11 +76,15 @@ class GameScene: SKScene {
         self.gameOverLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
         self.gameOverLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - gameOverLabel.frame.height * 3.5)
         
-//        self.gameOverLabel.text = "Acheivement: "
-//        self.gameOverLabel.fontSize = UIDevice.currentDevice().userInterfaceIdiom == .Pad ? 60 : 30
-//        self.gameOverLabel.zPosition = 9999999
-//        self.gameOverLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
-//        self.gameOverLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - gameOverLabel.frame.height * 3.5)
+        self.achievementLabel.text = "Achievement: "
+        self.achievementLabel.fontSize = UIDevice.currentDevice().userInterfaceIdiom == .Pad ? 60 : 30
+        self.achievementLabel.zPosition = 9999999
+        self.achievementLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
+        self.achievementLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - gameOverLabel.frame.height * 5)
+        
+        self.shareButton.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - gameOverLabel.frame.height * 7)
+        self.shareButton.size.width = 150
+        self.shareButton.size.height = 75
         
         var path = CGPathCreateMutable()
         CGPathMoveToPoint(path, nil, 0, 0)
@@ -114,7 +119,12 @@ class GameScene: SKScene {
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         super.touchesBegan(touches, withEvent: event)
         let touch = touches.first as! UITouch
-        self.pointToLocation(touch.locationInNode(self))
+        let location = touch.locationInNode(self)
+        if (self.nodeAtPoint(location) == self.shareButton) {
+            self.doShare(self.score)
+        } else {
+            self.pointToLocation(location)
+        }
     }
     
     override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -127,7 +137,9 @@ class GameScene: SKScene {
         self.howto.removeFromParent()
         self.score = 0
         self.gameOverLabel.removeFromParent()
+        self.achievementLabel.removeFromParent()
         self.maxScoreLabel.removeFromParent()
+        self.shareButton.removeFromParent()
         self.pacMan.zRotation = 0
         self.pacMan.fillColor = self.colorForScore(self.score)
         self.addChild(self.pacMan)
@@ -157,6 +169,10 @@ class GameScene: SKScene {
         self.maxScoreLabel.fontColor = self.colorForScore(maxScore)
         self.addChild(self.maxScoreLabel)
         self.addChild(self.gameOverLabel)
+        self.addChild(self.achievementLabel)
+        self.addChild(self.shareButton)
+        let level = self.achievementLevelForScore(self.score)
+        self.achievementLabel.text = "Achievement: \(level)"
         
         var wait = SKAction.waitForDuration(1.5)
         var setReady = SKAction.runBlock {
@@ -166,7 +182,7 @@ class GameScene: SKScene {
         }
         self.runAction(SKAction.sequence([wait, setReady]))
         
-        self.doShare(self.score)
+        //self.doShare(self.score)
     }
     
     /* Called before each frame is rendered */
@@ -222,17 +238,18 @@ class GameScene: SKScene {
     }
     
     func doShare(score: Int) {
-        let appName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleDisplayName") as? String
+        let appName = NSBundle.mainBundle().infoDictionary!["CFBundleName"] as! String
         let url = NSURL(string: "https://itunes.apple.com/us/app/pizza-slice/id931174800")
         let title = "I acheived the score \(score) in \(appName)"
-        
-        UIGraphicsBeginImageContext(self.view!.frame.size)
-        self.view!.layer.renderInContext(UIGraphicsGetCurrentContext())
-        let image = UIGraphicsGetImageFromCurrentImageContext()
+
+        UIGraphicsBeginImageContextWithOptions(self.view!.bounds.size, true, UIScreen.mainScreen().scale)
+        self.shareButton.hidden = true
+        self.view!.drawViewHierarchyInRect(self.view!.bounds, afterScreenUpdates: false)
+        let screenshot : UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
         var itemsToShare = [AnyObject]()
-        itemsToShare.append(image)
+        itemsToShare.append(screenshot)
         itemsToShare.append(title)
         itemsToShare.append(url!)
         var activityVC = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
@@ -243,7 +260,7 @@ class GameScene: SKScene {
         rootVC?.presentViewController(activityVC, animated: true, completion: nil)
     }
     
-    func colorForScore(score:Int) -> SKColor {
+    func colorForScore(score: Int) -> SKColor {
         switch score {
         case 0...9:
             return UIColor(red: 1, green: 1, blue: 0, alpha: 1)
@@ -260,6 +277,46 @@ class GameScene: SKScene {
         default:
             let tens = Int(score / 10)
             return UIColor(hue: CGFloat(tens), saturation: 1, brightness: 1, alpha: 1)
+        }
+    }
+    
+    func achievementLevelForScore(score: Int) -> String {
+        switch score {
+        case 0...9:
+            return "Bad"
+        case 10...19:
+            return "Eh"
+        case 20...29:
+            return "Meh"
+        case 30...39:
+            return "Fair"
+        case 40...49:
+            return "Decent"
+        case 50...59:
+            return "OK"
+        case 60...69:
+            return "Cool"
+        case 70...79:
+            return "Good"
+        case 80...89:
+            return "Better"
+        case 90...99:
+            return "Wild"
+        case 100...109:
+            return "Beast"
+        case 110...119:
+            return "Master"
+        case 120...129:
+            return "Champion"
+        case 130...139:
+            return "Wicked"
+        case 140...149:
+            return "Wickeder"
+        case 150...159:
+            return "Best"
+        default:
+            let bestLevel = Int((score - 140) / 10)
+            return "Best \(bestLevel)"
         }
     }
 
