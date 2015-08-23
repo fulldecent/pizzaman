@@ -16,14 +16,14 @@ class GameScene: SKScene {
     let cwSound = SKAction.playSoundFileNamed("cw.caf", waitForCompletion: false)
     let ccwSound = SKAction.playSoundFileNamed("ccw.caf", waitForCompletion: false)
     let dieSound = SKAction.playSoundFileNamed("die.caf", waitForCompletion: false)
-    var pacMan:SKShapeNode!
 
-    let scoreLabel = SKLabelNode(fontNamed: "American Typewriter")
-    let maxScoreLabel = SKLabelNode(fontNamed: "American Typewriter")
-    let gameOverLabel = SKLabelNode(fontNamed: "American Typewriter")
-    let achievementLabel = SKLabelNode(fontNamed: "American Typewriter")
+    let scoreLabel = SKLabelNode(fontNamed: "AmericanTypewriter")
+    let maxScoreLabel = SKLabelNode(fontNamed: "AmericanTypewriter")
+    let gameOverLabel = SKLabelNode(fontNamed: "AmericanTypewriter-Bold")
+    let achievementLabel = SKLabelNode(fontNamed: "AmericanTypewriter")
     let shareButton = SKSpriteNode(imageNamed: "share")
     
+    var pacMan:SKShapeNode!
     let pacManArc = M_PI * 0.4
     var viewRadius:CGFloat!
     var pacManRadius:CGFloat!
@@ -39,16 +39,15 @@ class GameScene: SKScene {
         self.viewRadius = hypot(view.frame.width, view.frame.height) / 2
         self.pacManRadius = self.viewRadius * 0.08
         
-        var background = SKSpriteNode(imageNamed: "background.jpg")
+        let background = SKSpriteNode(imageNamed: "background.jpg")
         background.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
         background.name = "background"
         background.xScale = 2.0
         background.yScale = 2.0
         self.addChild(background)
         
-        //        self.howto = SKSpriteNode(imageNamed: "howto")
         self.howto.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
-        self.howto.size = CGSizeMake(self.viewRadius * 0.4, self.viewRadius * 0.4)
+        self.howto.size = CGSizeMake(self.viewRadius * 0.45, self.viewRadius * 0.45)
         var actions = [SKAction]()
         actions.append(SKAction.rotateByAngle(CGFloat(-M_PI_2), duration: 0.5))
         actions.append(SKAction.waitForDuration(0.5))
@@ -56,33 +55,38 @@ class GameScene: SKScene {
         self.howto.runAction(SKAction.repeatActionForever(SKAction.sequence(actions)))
         self.addChild(self.howto)
         
-        self.scoreLabel.text = "Score : 0"
+        self.scoreLabel.text = "SCORE  0"
         self.scoreLabel.fontColor = self.colorForScore(self.score)
         self.scoreLabel.fontSize = UIDevice.currentDevice().userInterfaceIdiom == .Pad ? 60 : 30
         self.scoreLabel.zPosition = 10
         self.scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
-        self.scoreLabel.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height - scoreLabel.frame.height * 2)
+        self.scoreLabel.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height * 0.9)
         self.addChild(scoreLabel)
         
-        self.maxScoreLabel.text = "High Score : 0"
+        var maxScore = 0
+        if let savedMaxScore = NSUserDefaults.standardUserDefaults().objectForKey("maxScore") as? NSNumber {
+            maxScore = max(self.score, Int(savedMaxScore))
+        }
+        self.maxScoreLabel.text = "HIGH SCORE  \(maxScore)"
         self.maxScoreLabel.fontSize = UIDevice.currentDevice().userInterfaceIdiom == .Pad ? 60 : 30
         self.maxScoreLabel.zPosition = 10
         self.maxScoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
-        self.maxScoreLabel.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height - scoreLabel.frame.height * 3)
+        self.maxScoreLabel.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height * 0.8)
+        self.addChild(maxScoreLabel)
         
         self.gameOverLabel.text = "GAME OVER"
         self.gameOverLabel.fontSize = UIDevice.currentDevice().userInterfaceIdiom == .Pad ? 60 : 30
         self.gameOverLabel.zPosition = 9999999
         self.gameOverLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
-        self.gameOverLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - gameOverLabel.frame.height * 3.5)
+        self.gameOverLabel.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height * 0.3)
         
-        self.achievementLabel.text = "Achievement: "
+        self.achievementLabel.text = "ACHIEVEMENT"
         self.achievementLabel.fontSize = UIDevice.currentDevice().userInterfaceIdiom == .Pad ? 60 : 30
         self.achievementLabel.zPosition = 9999999
         self.achievementLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
-        self.achievementLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - gameOverLabel.frame.height * 5)
-        
-        self.shareButton.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - gameOverLabel.frame.height * 7)
+        self.achievementLabel.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height * 0.2)
+    
+        self.shareButton.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height * 0.1)
         self.shareButton.size.width = 150
         self.shareButton.size.height = 75
         
@@ -96,7 +100,7 @@ class GameScene: SKScene {
         self.pacMan.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
     }
 
-    func pointToLocation(point: CGPoint) {
+    func rotateToPoint(point: CGPoint) {
         if readyToStartNewGame {
             self.startGame()
         }
@@ -123,14 +127,14 @@ class GameScene: SKScene {
         if (self.nodeAtPoint(location) == self.shareButton) {
             self.doShare(self.score)
         } else {
-            self.pointToLocation(location)
+            self.rotateToPoint(location)
         }
     }
     
     override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
         super.touchesMoved(touches, withEvent: event)
         let touch = touches.first as! UITouch
-        self.pointToLocation(touch.locationInNode(self))
+        self.rotateToPoint(touch.locationInNode(self))
     }
     
     func startGame() {
@@ -143,7 +147,7 @@ class GameScene: SKScene {
         self.pacMan.zRotation = 0
         self.pacMan.fillColor = self.colorForScore(self.score)
         self.addChild(self.pacMan)
-        self.scoreLabel.text = "Score : \(self.score)"
+        self.scoreLabel.text = "SCORE  \(self.score)"
         self.scoreLabel.fontColor = self.colorForScore(self.score)
         self.readyToStartNewGame = false
         self.gameOver = false
@@ -165,14 +169,14 @@ class GameScene: SKScene {
             maxScore = max(self.score, Int(savedMaxScore))
         }
         NSUserDefaults.standardUserDefaults().setInteger(maxScore, forKey: "maxScore")
-        self.maxScoreLabel.text = "High Score : \(maxScore)"
+        self.maxScoreLabel.text = "HIGH SCORE  \(maxScore)"
         self.maxScoreLabel.fontColor = self.colorForScore(maxScore)
         self.addChild(self.maxScoreLabel)
         self.addChild(self.gameOverLabel)
         self.addChild(self.achievementLabel)
         self.addChild(self.shareButton)
         let level = self.achievementLevelForScore(self.score)
-        self.achievementLabel.text = "Achievement: \(level)"
+        self.achievementLabel.text = "\(level)"
         
         var wait = SKAction.waitForDuration(1.5)
         var setReady = SKAction.runBlock {
@@ -192,7 +196,6 @@ class GameScene: SKScene {
         
         let interval:NSTimeInterval = 0.15 + 2/(Double(self.score) + 1)
         self.nextPlaneLaunch = currentTime + interval
-        NSLog("launching")
         self.launchNewPlane()
     }
     
@@ -216,7 +219,7 @@ class GameScene: SKScene {
         var checkCollision:SKAction = SKAction.runBlock {
             if Double(cos(angle - self.pacMan.zRotation)) > Double(cos(self.pacManArc/2)) {
                 self.score += 1
-                self.scoreLabel.text = "Score : \(self.score)"
+                self.scoreLabel.text = "SCORE  \(self.score)"
                 self.runAction(self.eatSound)
                 let color = self.colorForScore(self.score)
                 self.pacMan.fillColor = color
