@@ -24,3 +24,12 @@ DerivedData
 # http://guides.cocoapods.org/using/using-cocoapods.html#should-i-ignore-the-pods-directory-in-source-control
 #
 # Pods/
+
+# fastlane, see https://github.com/fastlane/examples/issues/5
+/fastlane/report.xml
+/fastlane/Error*.png
+/fastlane/Preview.html
+/fastlane/screenshots/*/*-portrait.png
+/fastlane/screenshots/*/*-landscape.png
+/fastlane/screenshots/*/*-portrait_framed.png
+/fastlane/screenshots/*/*-landscape_framed.png
