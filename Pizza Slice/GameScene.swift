@@ -122,7 +122,7 @@ class GameScene: SKScene {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesBegan(touches, withEvent: event)
-        let touch = touches.first as! UITouch
+        let touch = touches.first!
         let location = touch.locationInNode(self)
         if (self.nodeAtPoint(location) == self.shareButton) {
             self.doShare(self.score)
@@ -133,7 +133,7 @@ class GameScene: SKScene {
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesMoved(touches, withEvent: event)
-        let touch = touches.first as! UITouch
+        let touch = touches.first!
         self.rotateToPoint(touch.locationInNode(self))
     }
     
