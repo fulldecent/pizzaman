@@ -90,7 +90,7 @@ class GameScene: SKScene {
         self.shareButton.size.width = 150
         self.shareButton.size.height = 75
         
-        var path = CGPathCreateMutable()
+        let path = CGPathCreateMutable()
         CGPathMoveToPoint(path, nil, 0, 0)
         CGPathAddArc(path, nil, 0, 0, self.pacManRadius, CGFloat(self.pacManArc/2), CGFloat(-self.pacManArc/2), false)
         self.pacMan = SKShapeNode(path:path)
@@ -120,7 +120,7 @@ class GameScene: SKScene {
         self.pacMan.zRotation = rotation
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesBegan(touches, withEvent: event)
         let touch = touches.first as! UITouch
         let location = touch.locationInNode(self)
@@ -131,7 +131,7 @@ class GameScene: SKScene {
         }
     }
     
-    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesMoved(touches, withEvent: event)
         let touch = touches.first as! UITouch
         self.rotateToPoint(touch.locationInNode(self))
@@ -160,7 +160,7 @@ class GameScene: SKScene {
         self.gameOver = true
         self.runAction(self.dieSound)
 
-        self.enumerateChildNodesWithName("plane", usingBlock: { (plane:SKNode!, x) -> Void in
+        self.enumerateChildNodesWithName("plane", usingBlock: { (plane:SKNode, x) -> Void in
             plane.removeFromParent()
         })
         
@@ -178,8 +178,8 @@ class GameScene: SKScene {
         let level = self.achievementLevelForScore(self.score)
         self.achievementLabel.text = "\(level)"
         
-        var wait = SKAction.waitForDuration(1.5)
-        var setReady = SKAction.runBlock {
+        let wait = SKAction.waitForDuration(1.5)
+        let setReady = SKAction.runBlock {
             self.pacMan.removeFromParent()
             self.addChild(self.howto)
             self.readyToStartNewGame = true
@@ -207,16 +207,16 @@ class GameScene: SKScene {
                                          self.pacManRadius * sin(angle) + CGRectGetMidY(self.frame))
         let middlePoint = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
         
-        var plane:SKSpriteNode = SKSpriteNode(imageNamed: "plane")
+        let plane:SKSpriteNode = SKSpriteNode(imageNamed: "plane")
         plane.position = startPoint
         plane.name = "plane"
         plane.size = CGSizeMake(self.viewRadius * 0.05, self.viewRadius * 0.05)
         self.addChild(plane)
         
-        var approachPacMac = SKAction.moveTo(collisionPoint, duration: 5)
+        let approachPacMac = SKAction.moveTo(collisionPoint, duration: 5)
         approachPacMac.timingMode = SKActionTimingMode.EaseIn
         
-        var checkCollision:SKAction = SKAction.runBlock {
+        let checkCollision:SKAction = SKAction.runBlock {
             if Double(cos(angle - self.pacMan.zRotation)) > Double(cos(self.pacManArc/2)) {
                 self.score += 1
                 self.scoreLabel.text = "SCORE  \(self.score)"
@@ -229,14 +229,14 @@ class GameScene: SKScene {
             }
         }
         
-        var approachCenter = SKAction.moveTo(middlePoint, duration: 0.4)
+        let approachCenter = SKAction.moveTo(middlePoint, duration: 0.4)
         approachCenter.timingMode = SKActionTimingMode.EaseOut
         
-        var deleteNode:SKAction = SKAction.runBlock {
+        let deleteNode:SKAction = SKAction.runBlock {
             plane.removeFromParent()
         }
 
-        var sequence:SKAction = SKAction.sequence([approachPacMac, checkCollision, approachCenter, deleteNode])
+        let sequence:SKAction = SKAction.sequence([approachPacMac, checkCollision, approachCenter, deleteNode])
         plane.runAction(sequence)
     }
     
@@ -255,7 +255,7 @@ class GameScene: SKScene {
         itemsToShare.append(screenshot)
         itemsToShare.append(title)
         itemsToShare.append(url!)
-        var activityVC = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+        let activityVC = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
         activityVC.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeAssignToContact]
         //activityVC.completionWithItemsHandler = {// Google Tracker event  }()
         

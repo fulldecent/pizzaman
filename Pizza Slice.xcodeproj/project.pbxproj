@@ -195,6 +195,8 @@
 		D903603619F1CAE1009584B8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "William Entriken";
 				TargetAttributes = {
