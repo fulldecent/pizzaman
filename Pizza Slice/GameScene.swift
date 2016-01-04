@@ -101,12 +101,14 @@ class GameScene: SKScene {
     }
 
     func rotateToPoint(point: CGPoint) {
+        guard !gameOver else {
+            return
+        }
+        
         if readyToStartNewGame {
             self.startGame()
         }
-        if gameOver {
-            return
-        }
+
         let rotation = atan2(point.y - self.frame.height/2, point.x - self.frame.width/2)
         let rotationDifference = rotation - self.pacMan.zRotation
         let differenceQuadrant14 = (rotationDifference + CGFloat(M_PI)) % CGFloat(2 * M_PI) - CGFloat(M_PI)
@@ -154,9 +156,10 @@ class GameScene: SKScene {
     }
     
     func gameOver(attackingPiece: SKNode) {
-        if self.gameOver {
+        guard !gameOver else {
             return
         }
+
         self.gameOver = true
         self.runAction(self.dieSound)
 
@@ -191,8 +194,12 @@ class GameScene: SKScene {
     
     /* Called before each frame is rendered */
     override func update(currentTime: CFTimeInterval) {
-        if gameOver {return}
-        if currentTime < self.nextPlaneLaunch {return}
+        guard !gameOver else {
+            return
+        }
+        guard currentTime >= self.nextPlaneLaunch else {
+            return
+        }
         
         let interval:NSTimeInterval = 0.15 + 2/(Double(self.score) + 1)
         self.nextPlaneLaunch = currentTime + interval
