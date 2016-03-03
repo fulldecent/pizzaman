@@ -10,7 +10,6 @@ import SpriteKit
 import AVFoundation
 
 class GameScene: SKScene {
-    
     let howto = SKSpriteNode(imageNamed: "howto")
     let eatSound = SKAction.playSoundFileNamed("eat.caf", waitForCompletion: false)
     let cwSound = SKAction.playSoundFileNamed("cw.caf", waitForCompletion: false)
@@ -28,7 +27,7 @@ class GameScene: SKScene {
     var viewRadius:CGFloat!
     var pacManRadius:CGFloat!
     var score:Int = 0
-    var direction = 0
+    var turningClockwise = true
     var gameOver = false
     var readyToStartNewGame = true
     var nextPlaneLaunch:CFTimeInterval = 0
@@ -101,34 +100,27 @@ class GameScene: SKScene {
     }
 
     func rotateToPoint(point: CGPoint) {
-        guard !gameOver else {
-            return
-        }
-        
-        if readyToStartNewGame {
-            self.startGame()
-        }
-
         let rotation = atan2(point.y - self.frame.height/2, point.x - self.frame.width/2)
         let rotationDifference = rotation - self.pacMan.zRotation
         let differenceQuadrant14 = (rotationDifference + CGFloat(M_PI)) % CGFloat(2 * M_PI) - CGFloat(M_PI)
-        if (differenceQuadrant14 > 0 && self.direction != 1) {
+        if (differenceQuadrant14 > 0 && !self.turningClockwise) {
             self.runAction(self.ccwSound)
-            self.direction = 1
-        } else if (differenceQuadrant14 < 0 && self.direction == 1) {
+            self.turningClockwise = true
+        } else if (differenceQuadrant14 < 0 && self.turningClockwise) {
             self.runAction(self.cwSound)
-            self.direction = -1
+            self.turningClockwise = false
         }
         self.pacMan.zRotation = rotation
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesBegan(touches, withEvent: event)
-        let touch = touches.first!
-        let location = touch.locationInNode(self)
+        let location = touches.first!.locationInNode(self)
         if (self.nodeAtPoint(location) == self.shareButton) {
             self.doShare(self.score)
-        } else {
+        } else if readyToStartNewGame {
+            self.startGame()
+        } else if !gameOver {
             self.rotateToPoint(location)
         }
     }
@@ -188,8 +180,6 @@ class GameScene: SKScene {
             self.readyToStartNewGame = true
         }
         self.runAction(SKAction.sequence([wait, setReady]))
-        
-        //self.doShare(self.score)
     }
     
     /* Called before each frame is rendered */
@@ -207,14 +197,14 @@ class GameScene: SKScene {
     }
     
     func launchNewPlane() {
-        let angle:CGFloat = CGFloat(Double(arc4random()) / 0x100000000 * 2 * M_PI)
+        let angle = CGFloat(Double(arc4random()) / 0x100000000 * 2 * M_PI)
         let startPoint = CGPointMake(self.viewRadius * cos(angle) + CGRectGetMidX(self.frame),
                                      self.viewRadius * sin(angle) + CGRectGetMidY(self.frame))
         let collisionPoint = CGPointMake(self.pacManRadius * cos(angle) + CGRectGetMidX(self.frame),
                                          self.pacManRadius * sin(angle) + CGRectGetMidY(self.frame))
         let middlePoint = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
         
-        let plane:SKSpriteNode = SKSpriteNode(imageNamed: "plane")
+        let plane = SKSpriteNode(imageNamed: "plane")
         plane.position = startPoint
         plane.name = "plane"
         plane.size = CGSizeMake(self.viewRadius * 0.05, self.viewRadius * 0.05)
@@ -329,5 +319,4 @@ class GameScene: SKScene {
             return "Best \(bestLevel)"
         }
     }
-
 }
