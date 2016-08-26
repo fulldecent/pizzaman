@@ -10,7 +10,7 @@ import SpriteKit
 import AVFoundation
 
 class GameScene: SKScene {
-    let howto = SKSpriteNode(imageNamed: "howto")
+    let howto = SKSpriteNode(imageNamed: "howto1")
     let eatSound = SKAction.playSoundFileNamed("eat.caf", waitForCompletion: false)
     let cwSound = SKAction.playSoundFileNamed("cw.caf", waitForCompletion: false)
     let ccwSound = SKAction.playSoundFileNamed("ccw.caf", waitForCompletion: false)
@@ -23,7 +23,7 @@ class GameScene: SKScene {
     let shareButton = SKSpriteNode(imageNamed: "share")
     
     var pacMan:SKShapeNode!
-    let pacManArc = M_PI * 0.4
+    let pacManArc = M_PI * 0.45
     var viewRadius:CGFloat!
     var pacManRadius:CGFloat!
     var score:Int = 0
@@ -48,9 +48,14 @@ class GameScene: SKScene {
         self.howto.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
         self.howto.size = CGSizeMake(self.viewRadius * 0.45, self.viewRadius * 0.45)
         var actions = [SKAction]()
-        actions.append(SKAction.rotateByAngle(CGFloat(-M_PI_2), duration: 0.5))
-        actions.append(SKAction.waitForDuration(0.5))
-        actions.append(SKAction.rotateByAngle(CGFloat(+M_PI_2), duration: 0))
+        actions.append(SKAction.setTexture(SKTexture(imageNamed: "howto1")))
+        actions.append(SKAction.runBlock {
+            let angle = CGFloat(Double(arc4random()) / 0x100000000 * 2 * M_PI)
+            self.howto.runAction(SKAction.rotateByAngle(angle, duration: 0))
+        })
+        actions.append(SKAction.waitForDuration(0.3))
+        actions.append(SKAction.setTexture(SKTexture(imageNamed: "howto2")))
+        actions.append(SKAction.waitForDuration(0.6))
         self.howto.runAction(SKAction.repeatActionForever(SKAction.sequence(actions)))
         self.addChild(self.howto)
         
