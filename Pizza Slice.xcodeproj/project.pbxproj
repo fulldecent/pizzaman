@@ -26,7 +26,6 @@
 		D95AC2C81D70CF1B008217FF /* howto2.png in Resources */ = {isa = PBXBuildFile; fileRef = D95AC2C61D70CF1B008217FF /* howto2.png */; };
 		D95AC2C91D70CF1B008217FF /* howto1.png in Resources */ = {isa = PBXBuildFile; fileRef = D95AC2C71D70CF1B008217FF /* howto1.png */; };
 		D96F0A271B2DCFEB00DBC632 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = D96F0A261B2DCFEB00DBC632 /* share.png */; };
-		D96F0A291B2DD31700DBC632 /* howto.png in Resources */ = {isa = PBXBuildFile; fileRef = D96F0A281B2DD31700DBC632 /* howto.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,7 +71,6 @@
 		D95AC2C61D70CF1B008217FF /* howto2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = howto2.png; sourceTree = "<group>"; };
 		D95AC2C71D70CF1B008217FF /* howto1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = howto1.png; sourceTree = "<group>"; };
 		D96F0A261B2DCFEB00DBC632 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
-		D96F0A281B2DD31700DBC632 /* howto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = howto.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,7 +132,6 @@
 				D9361CB619F23C3100574A06 /* background.jpg */,
 				D9361CB219F2366F00574A06 /* plane.png */,
 				D96F0A261B2DCFEB00DBC632 /* share.png */,
-				D96F0A281B2DD31700DBC632 /* howto.png */,
 				D95AC2C61D70CF1B008217FF /* howto2.png */,
 				D95AC2C71D70CF1B008217FF /* howto1.png */,
 				D903604119F1CAE1009584B8 /* Supporting Files */,
@@ -253,19 +250,22 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "William Entriken";
 				TargetAttributes = {
 					D903603D19F1CAE1009584B8 = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = 8Q693ZG5RN;
+						LastSwiftMigration = 0800;
 					};
 					D903605419F1CAE1009584B8 = {
 						CreatedOnToolsVersion = 6.0;
+						LastSwiftMigration = 0800;
 						TestTargetID = D903603D19F1CAE1009584B8;
 					};
 					D92EB4C31C88DEE60009EA72 = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = D903603D19F1CAE1009584B8;
 					};
 				};
@@ -297,7 +297,6 @@
 			files = (
 				D934EEEE19F1F5AB003B6EFE /* ccw.caf in Resources */,
 				D934EEF019F1F5AB003B6EFE /* die.caf in Resources */,
-				D96F0A291B2DD31700DBC632 /* howto.png in Resources */,
 				D903605019F1CAE1009584B8 /* LaunchScreen.xib in Resources */,
 				D95AC2C81D70CF1B008217FF /* howto2.png in Resources */,
 				D9361CB319F2366F00574A06 /* plane.png in Resources */,
@@ -403,8 +402,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -413,6 +414,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -447,8 +449,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -456,6 +460,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -465,6 +470,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -482,6 +488,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.phor.PizzaSlice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -498,6 +505,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.phor.PizzaSlice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -518,6 +526,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.phor.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pizza Slice.app/Pizza Slice";
 			};
 			name = Debug;
@@ -534,6 +543,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.phor.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pizza Slice.app/Pizza Slice";
 			};
 			name = Release;
@@ -548,6 +558,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.phor.PizzaSlice.Pizza-SliceUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "Pizza Slice";
 				USES_XCTRUNNER = YES;
 			};
@@ -564,6 +575,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.phor.PizzaSlice.Pizza-SliceUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "Pizza Slice";
 				USES_XCTRUNNER = YES;
 			};

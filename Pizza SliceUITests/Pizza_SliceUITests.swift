@@ -29,7 +29,7 @@ class Pizza_SliceUITests: XCTestCase {
         
         snapshot("01Intro")
 
-        let element = XCUIApplication().childrenMatchingType(.Window).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element
+        let element = XCUIApplication().children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element
         element.tap()
         
         snapshot("02Begin")

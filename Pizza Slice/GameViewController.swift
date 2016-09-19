@@ -16,9 +16,9 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        adBannerView = ADBannerView(adType: ADAdType.Banner)
+        adBannerView = ADBannerView(adType: ADAdType.banner)
         adBannerView.delegate = self
-        adBannerView.hidden = true
+        adBannerView.isHidden = true
         view.addSubview(adBannerView)
 
         let skView = SKView(frame: self.view.frame)
@@ -33,11 +33,11 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
         adBannerView.center = CGPoint(x: adBannerView.center.x, y: view.bounds.size.height - adBannerView.frame.size.height / 2)
     }
     
-    func bannerViewDidLoadAd(banner: ADBannerView!) {
-        adBannerView.hidden = false
+    func bannerViewDidLoadAd(_ banner: ADBannerView!) {
+        adBannerView.isHidden = false
     }
     
-    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
-        adBannerView.hidden = true
+    func bannerView(_ banner: ADBannerView!, didFailToReceiveAdWithError error: Error!) {
+        adBannerView.isHidden = true
     }
 }
