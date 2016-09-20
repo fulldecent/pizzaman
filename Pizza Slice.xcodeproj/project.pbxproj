@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ABF5688777E03437CACD90F3 /* Pods_Pizza_Slice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9AAF1EDC2C92DA061EFB68 /* Pods_Pizza_Slice.framework */; };
 		D903604419F1CAE1009584B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D903604319F1CAE1009584B8 /* AppDelegate.swift */; };
 		D903604819F1CAE1009584B8 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D903604719F1CAE1009584B8 /* GameViewController.swift */; };
 		D903604B19F1CAE1009584B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D903604919F1CAE1009584B8 /* Main.storyboard */; };
@@ -26,6 +27,11 @@
 		D95AC2C81D70CF1B008217FF /* howto2.png in Resources */ = {isa = PBXBuildFile; fileRef = D95AC2C61D70CF1B008217FF /* howto2.png */; };
 		D95AC2C91D70CF1B008217FF /* howto1.png in Resources */ = {isa = PBXBuildFile; fileRef = D95AC2C71D70CF1B008217FF /* howto1.png */; };
 		D96F0A271B2DCFEB00DBC632 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = D96F0A261B2DCFEB00DBC632 /* share.png */; };
+		D983D0FB1D907068006D55C2 /* moreDetails.png in Resources */ = {isa = PBXBuildFile; fileRef = D983D0FA1D907068006D55C2 /* moreDetails.png */; };
+		D983D0FF1D915FF7006D55C2 /* FriendRankTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D983D0FE1D915FF7006D55C2 /* FriendRankTableViewController.swift */; };
+		D983D1011D916914006D55C2 /* FriendRankPermissionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D983D1001D916914006D55C2 /* FriendRankPermissionsTableViewController.swift */; };
+		D983D1031D91873B006D55C2 /* FriendRank.swift in Sources */ = {isa = PBXBuildFile; fileRef = D983D1021D91873B006D55C2 /* FriendRank.swift */; };
+		D983D1061D91875D006D55C2 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D983D1051D91875D006D55C2 /* Contacts.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +51,23 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		D983D0F91D9068DC006D55C2 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		8A9AAF1EDC2C92DA061EFB68 /* Pods_Pizza_Slice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pizza_Slice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7C926EA765ABDBA58134C3D /* Pods-Pizza Slice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pizza Slice.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pizza Slice/Pods-Pizza Slice.release.xcconfig"; sourceTree = "<group>"; };
+		C7D00B97DD8179C4CEE4947A /* Pods-Pizza Slice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pizza Slice.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pizza Slice/Pods-Pizza Slice.debug.xcconfig"; sourceTree = "<group>"; };
 		D903603E19F1CAE1009584B8 /* Pizza Slice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pizza Slice.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D903604219F1CAE1009584B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D903604319F1CAE1009584B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +93,11 @@
 		D95AC2C61D70CF1B008217FF /* howto2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = howto2.png; sourceTree = "<group>"; };
 		D95AC2C71D70CF1B008217FF /* howto1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = howto1.png; sourceTree = "<group>"; };
 		D96F0A261B2DCFEB00DBC632 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
+		D983D0FA1D907068006D55C2 /* moreDetails.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = moreDetails.png; sourceTree = "<group>"; };
+		D983D0FE1D915FF7006D55C2 /* FriendRankTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FriendRankTableViewController.swift; path = ../FriendRankTableViewController.swift; sourceTree = "<group>"; };
+		D983D1001D916914006D55C2 /* FriendRankPermissionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRankPermissionsTableViewController.swift; sourceTree = "<group>"; };
+		D983D1021D91873B006D55C2 /* FriendRank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRank.swift; sourceTree = "<group>"; };
+		D983D1051D91875D006D55C2 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +105,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D983D1061D91875D006D55C2 /* Contacts.framework in Frameworks */,
 				D9361CAF19F2293F00574A06 /* iAd.framework in Frameworks */,
+				ABF5688777E03437CACD90F3 /* Pods_Pizza_Slice.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +128,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A2D269CCDC14612365B37E28 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C7D00B97DD8179C4CEE4947A /* Pods-Pizza Slice.debug.xcconfig */,
+				C7C926EA765ABDBA58134C3D /* Pods-Pizza Slice.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D903603519F1CAE1009584B8 = {
 			isa = PBXGroup;
 			children = (
@@ -106,7 +144,8 @@
 				D903605819F1CAE1009584B8 /* Pizza SliceTests */,
 				D92EB4C51C88DEE60009EA72 /* Pizza SliceUITests */,
 				D903603F19F1CAE1009584B8 /* Products */,
-				D9361CAE19F2293E00574A06 /* iAd.framework */,
+				D983D1041D91875D006D55C2 /* Frameworks */,
+				A2D269CCDC14612365B37E28 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,6 +166,9 @@
 				D903604719F1CAE1009584B8 /* GameViewController.swift */,
 				D934EEE619F1F149003B6EFE /* GameScene.swift */,
 				D903604919F1CAE1009584B8 /* Main.storyboard */,
+				D983D0FE1D915FF7006D55C2 /* FriendRankTableViewController.swift */,
+				D983D1001D916914006D55C2 /* FriendRankPermissionsTableViewController.swift */,
+				D983D1021D91873B006D55C2 /* FriendRank.swift */,
 				D903604C19F1CAE1009584B8 /* Images.xcassets */,
 				D903604E19F1CAE1009584B8 /* LaunchScreen.xib */,
 				D9361CB619F23C3100574A06 /* background.jpg */,
@@ -134,6 +176,7 @@
 				D96F0A261B2DCFEB00DBC632 /* share.png */,
 				D95AC2C61D70CF1B008217FF /* howto2.png */,
 				D95AC2C71D70CF1B008217FF /* howto1.png */,
+				D983D0FA1D907068006D55C2 /* moreDetails.png */,
 				D903604119F1CAE1009584B8 /* Supporting Files */,
 			);
 			path = "Pizza Slice";
@@ -186,6 +229,16 @@
 			name = Sounds;
 			sourceTree = "<group>";
 		};
+		D983D1041D91875D006D55C2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D9361CAE19F2293E00574A06 /* iAd.framework */,
+				D983D1051D91875D006D55C2 /* Contacts.framework */,
+				8A9AAF1EDC2C92DA061EFB68 /* Pods_Pizza_Slice.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -193,9 +246,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D903605F19F1CAE1009584B8 /* Build configuration list for PBXNativeTarget "Pizza Slice" */;
 			buildPhases = (
+				6058B7EA8CCEBC51EEDEAB38 /* [CP] Check Pods Manifest.lock */,
 				D903603A19F1CAE1009584B8 /* Sources */,
 				D903603B19F1CAE1009584B8 /* Frameworks */,
 				D903603C19F1CAE1009584B8 /* Resources */,
+				D983D0F91D9068DC006D55C2 /* Embed Frameworks */,
+				E6BCEFF0056CA8CE249A758A /* [CP] Embed Pods Frameworks */,
+				2EEE055764E1227A69F9C6AA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -299,6 +356,7 @@
 				D934EEF019F1F5AB003B6EFE /* die.caf in Resources */,
 				D903605019F1CAE1009584B8 /* LaunchScreen.xib in Resources */,
 				D95AC2C81D70CF1B008217FF /* howto2.png in Resources */,
+				D983D0FB1D907068006D55C2 /* moreDetails.png in Resources */,
 				D9361CB319F2366F00574A06 /* plane.png in Resources */,
 				D903604D19F1CAE1009584B8 /* Images.xcassets in Resources */,
 				D9361CB119F2345500574A06 /* eat.caf in Resources */,
@@ -326,14 +384,65 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2EEE055764E1227A69F9C6AA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pizza Slice/Pods-Pizza Slice-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6058B7EA8CCEBC51EEDEAB38 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E6BCEFF0056CA8CE249A758A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pizza Slice/Pods-Pizza Slice-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D903603A19F1CAE1009584B8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				D934EEE719F1F14A003B6EFE /* GameScene.swift in Sources */,
+				D983D0FF1D915FF7006D55C2 /* FriendRankTableViewController.swift in Sources */,
 				D903604819F1CAE1009584B8 /* GameViewController.swift in Sources */,
 				D903604419F1CAE1009584B8 /* AppDelegate.swift in Sources */,
+				D983D1011D916914006D55C2 /* FriendRankPermissionsTableViewController.swift in Sources */,
+				D983D1031D91873B006D55C2 /* FriendRank.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,7 +536,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -467,7 +576,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -478,12 +587,13 @@
 		};
 		D903606019F1CAE1009584B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C7D00B97DD8179C4CEE4947A /* Pods-Pizza Slice.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Pizza Slice/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.phor.PizzaSlice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -495,12 +605,13 @@
 		};
 		D903606119F1CAE1009584B8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C7C926EA765ABDBA58134C3D /* Pods-Pizza Slice.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Pizza Slice/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.phor.PizzaSlice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
