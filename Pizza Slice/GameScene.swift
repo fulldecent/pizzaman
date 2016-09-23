@@ -161,7 +161,7 @@ class GameScene: SKScene {
         super.touchesBegan(touches, with: event)
         let location = touches.first!.location(in: self)
         if self.atPoint(location) == self.clickMe {
-            self.viewController.performSegue(withIdentifier: "showFriendRank", sender: self)
+            self.viewController.performSegue(withIdentifier: "friendRank", sender: self)
         } else if readyToStartNewGame {
             self.startGame()
         } else if !gameOver {
@@ -258,6 +258,9 @@ class GameScene: SKScene {
             self.readyToStartNewGame = true
         }
         self.run(SKAction.sequence([wait, setReady]))
+        
+        let fr = FriendRank()
+        fr.sendScoreToCloud(score: self.score)
     }
     
     /* Called before each frame is rendered */

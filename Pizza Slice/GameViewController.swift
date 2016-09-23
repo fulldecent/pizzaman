@@ -40,7 +40,7 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
         self.navigationController?.navigationBar.isHidden = true;
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.navigationBar.isHidden = false;
     }

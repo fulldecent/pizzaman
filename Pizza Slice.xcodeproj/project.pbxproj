@@ -28,7 +28,6 @@
 		D95AC2C91D70CF1B008217FF /* howto1.png in Resources */ = {isa = PBXBuildFile; fileRef = D95AC2C71D70CF1B008217FF /* howto1.png */; };
 		D96F0A271B2DCFEB00DBC632 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = D96F0A261B2DCFEB00DBC632 /* share.png */; };
 		D983D0FB1D907068006D55C2 /* moreDetails.png in Resources */ = {isa = PBXBuildFile; fileRef = D983D0FA1D907068006D55C2 /* moreDetails.png */; };
-		D983D0FF1D915FF7006D55C2 /* FriendRankTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D983D0FE1D915FF7006D55C2 /* FriendRankTableViewController.swift */; };
 		D983D1011D916914006D55C2 /* FriendRankPermissionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D983D1001D916914006D55C2 /* FriendRankPermissionsTableViewController.swift */; };
 		D983D1031D91873B006D55C2 /* FriendRank.swift in Sources */ = {isa = PBXBuildFile; fileRef = D983D1021D91873B006D55C2 /* FriendRank.swift */; };
 		D983D1061D91875D006D55C2 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D983D1051D91875D006D55C2 /* Contacts.framework */; };
@@ -94,7 +93,6 @@
 		D95AC2C71D70CF1B008217FF /* howto1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = howto1.png; sourceTree = "<group>"; };
 		D96F0A261B2DCFEB00DBC632 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		D983D0FA1D907068006D55C2 /* moreDetails.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = moreDetails.png; sourceTree = "<group>"; };
-		D983D0FE1D915FF7006D55C2 /* FriendRankTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FriendRankTableViewController.swift; path = ../FriendRankTableViewController.swift; sourceTree = "<group>"; };
 		D983D1001D916914006D55C2 /* FriendRankPermissionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRankPermissionsTableViewController.swift; sourceTree = "<group>"; };
 		D983D1021D91873B006D55C2 /* FriendRank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRank.swift; sourceTree = "<group>"; };
 		D983D1051D91875D006D55C2 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
@@ -166,7 +164,6 @@
 				D903604719F1CAE1009584B8 /* GameViewController.swift */,
 				D934EEE619F1F149003B6EFE /* GameScene.swift */,
 				D903604919F1CAE1009584B8 /* Main.storyboard */,
-				D983D0FE1D915FF7006D55C2 /* FriendRankTableViewController.swift */,
 				D983D1001D916914006D55C2 /* FriendRankPermissionsTableViewController.swift */,
 				D983D1021D91873B006D55C2 /* FriendRank.swift */,
 				D903604C19F1CAE1009584B8 /* Images.xcassets */,
@@ -438,7 +435,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D934EEE719F1F14A003B6EFE /* GameScene.swift in Sources */,
-				D983D0FF1D915FF7006D55C2 /* FriendRankTableViewController.swift in Sources */,
 				D903604819F1CAE1009584B8 /* GameViewController.swift in Sources */,
 				D903604419F1CAE1009584B8 /* AppDelegate.swift in Sources */,
 				D983D1011D916914006D55C2 /* FriendRankPermissionsTableViewController.swift in Sources */,

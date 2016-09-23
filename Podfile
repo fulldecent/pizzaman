@@ -4,4 +4,5 @@ use_frameworks!
 
 target 'Pizza Slice' do
     pod 'Alamofire', '~> 4.0'
+    pod 'MBProgressHUD', '~> 1.0.0'
 end
