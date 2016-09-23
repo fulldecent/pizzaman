@@ -18,47 +18,36 @@ enum Player {
     init(json jsonObject: [[String : String]]) {
         self = .friend(jsonObject.flatMap {Account(json: $0)})
     }
-}
-
-/*
-// Can be a local player on this device or may represent someone out there in the world
-struct Player {
-    /// Whether this player is the user touching the device
-    let isMe: Bool
     
-    let maxScore: Int
-    
-    /// Accounts which identify the player
-    let accounts: [Account]
-    
-    init?(json jsonObject: [String : Any]) {
-        isMe = false
-        guard let newMaxScore = jsonObject["max_score"] as? Int else {
-            return nil
+    func name() -> String {
+        switch self {
+        case .me:
+            return "ME"
+        case .friend(let accounts):
+            for account in accounts {
+                switch account.accountType {
+                case .contactsPhone:
+                    let contactStore = CNContactStore()
+                    let keys: [CNKeyDescriptor] = [CNContactFormatter.descriptorForRequiredKeys(for: .fullName), CNContactPhoneNumbersKey as CNKeyDescriptor]
+                    let request2 = try? contactStore.unifiedContact(withIdentifier: account.accountNickname ?? "bobobo", keysToFetch: keys)
+                    guard let request = request2 else {
+                        return "SOME FRIEND"
+                    }
+                    let formatter = CNContactFormatter()
+                    let formatted = formatter.string(from: request)
+                    guard let xx = formatted else {
+                        return "YOUR FRIEND"
+                    }
+                    return xx
+                default:
+                    break
+                    //return "A FRIEND"
+                }
+            }
+            return "A FRIEND :-)"
         }
-        maxScore = newMaxScore
-        guard let newAccounts = jsonObject["accounts"] as? [[String : String]] else {
-            return nil
-        }
-        accounts = newAccounts.flatMap {Account(json: $0)}
     }
-    
-    /*
-    private init() {
-        isMe = true
-        
-        accounts = []
-    }
- */
-    
-    static let me: Player = {
-        
-        
-        let retval = Player()
-        return retval
-    }()
 }
-*/
 
 struct Account {
     /// What network this account exists in
@@ -107,10 +96,17 @@ class FriendRank {
     var didGivePhoneNumber = UserDefaults.standard.bool(forKey: "didGivePhoneNumber")
     var didGiveScore = UserDefaults.standard.bool(forKey: "didGiveScore")
     
-    
     var presentingViewController: UIViewController! = nil
     var contactStore = CNContactStore()
 
+///WARN: dont do this because we have a delegate
+    static let shared = FriendRank()
+    
+    private init() {
+    }
+    
+    
+    
     func showMessage(_ message: String) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -155,7 +151,7 @@ class FriendRank {
         let request = CNContactFetchRequest(keysToFetch: keys)
         
         do {
-            try self.contactStore.enumerateContacts(with: request) {
+            try contactStore.enumerateContacts(with: request) {
                 (contact, stop) in
                 // Array containing all unified contacts from everywhere
                 contacts.append(contact)
@@ -164,9 +160,11 @@ class FriendRank {
         catch {
             print("unable to fetch contacts")
         }
+        sendAddressBookToCloud(contacts)
     }
     
     func sendAddressBookToCloud(_ contacts: [CNContact]) {
+//TODO: use the actual data type here instead of [[STring:String]], and have a TO JSON method of that struct
         var parameters: [[String : String]] = []
         let formatter = CNContactFormatter()
         for contact in contacts {
@@ -279,9 +277,7 @@ class FriendRank {
     }
     
     // -------------
-    
-    var rankings = [Player]()
-    
+        
     var leaderBoard = [(maxScore: Int, player: Player)]()
     
     func updateRankings(completion: ((Bool) -> Void)?) {
@@ -302,7 +298,7 @@ class FriendRank {
                     newLeaderBoard.append((maxScore: maxScore, player: Player(json: accounts)))
                 }
                 let myBoardEntry: (maxScore: Int, player: Player) = (maxScore: self.myMaxScore, player: .me)
-                let indexToInsert = newLeaderBoard.index(where: {$0.maxScore < self.myMaxScore}) ?? self.leaderBoard.endIndex
+                let indexToInsert = newLeaderBoard.index(where: {$0.maxScore < self.myMaxScore}) ?? newLeaderBoard.endIndex
                 newLeaderBoard.insert(myBoardEntry, at: indexToInsert)
                 self.leaderBoard = newLeaderBoard
                 completion?(true)

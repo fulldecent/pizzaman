@@ -45,7 +45,7 @@ class FriendRankPermissionsTableViewController: UITableViewController {
         (name: "Enter your number", color: UIColor(red: 39.0/255, green: 174.0/255, blue: 96.0/255, alpha: 1), icon: nil)
     ]
 
-    let friendRank = FriendRank()    
+    let friendRank = FriendRank.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +54,7 @@ class FriendRankPermissionsTableViewController: UITableViewController {
         navigationController?.navigationBar.barStyle = .black
         self.friendRank.delegate = self
         self.friendRank.presentingViewController = self
+        refresh()
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,9 +78,9 @@ class FriendRankPermissionsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "source", for: indexPath)
         switch TableSections(rawValue: indexPath.section)! {
         case .givePermission:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "source", for: indexPath)
             cell.textLabel?.text = permissions[indexPath.row].name
             cell.backgroundColor = permissions[indexPath.row].color
             cell.textLabel?.textColor = .white
@@ -93,10 +94,21 @@ class FriendRankPermissionsTableViewController: UITableViewController {
                 break
                 
             }
+            return cell
         case .leaderboard:
-            break
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ranking", for: indexPath)
+            let leaderBoardRow = friendRank.leaderBoard[indexPath.row]
+            cell.textLabel?.text = leaderBoardRow.player.name()
+            cell.detailTextLabel?.text = "\(leaderBoardRow.maxScore)"
+            switch leaderBoardRow.player {
+            case .me:
+                cell.backgroundColor = UIColor.yellow
+            case .friend:
+                cell.backgroundColor = UIColor.white
+            }
+            
+            return cell
         }
-        return cell
     }
     
     
@@ -144,7 +156,7 @@ class FriendRankPermissionsTableViewController: UITableViewController {
 
     /////
     
-    @IBAction func refresh(_ sender: UIRefreshControl) {
+    @IBAction func refresh() {
         friendRank.updateRankings {
             (Bool) -> Void in
             self.tableView.reloadData()
