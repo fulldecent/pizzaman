@@ -11,7 +11,7 @@ import Contacts
 import Alamofire
 import MBProgressHUD
 
-enum Player {
+enum Player: Equatable {
     case me;
     case friend([Account]);
     
@@ -47,9 +47,19 @@ enum Player {
             return "A FRIEND :-)"
         }
     }
-}
+    
+    static func ==(lhs:Player, rhs:Player) -> Bool {
+        switch (lhs, rhs) {
+        case (.me, .me):
+            return true
+        case (.friend(let lFriend), .friend(let rFriend)):
+            return Set<Account>(lFriend) == Set<Account>(rFriend)
+        default:
+            return false
+        }
+    }}
 
-struct Account {
+struct Account: Hashable {
     /// What network this account exists in
     let accountType: AccountTypes
     
@@ -72,6 +82,14 @@ struct Account {
         accountType = newAccountType
         accountIdentifier = newAccountIdentifier
         accountNickname = jsonObject["account_nickname"]
+    }
+    
+    var hashValue: Int {
+        return (accountIdentifier + (accountNickname ?? "--")).hashValue + accountType.hashValue
+    }
+    
+    static func == (lhs: Account, rhs: Account) -> Bool {
+        return lhs.accountType == rhs.accountType && lhs.accountIdentifier == rhs.accountIdentifier && lhs.accountNickname == rhs.accountNickname
     }
 }
 
@@ -280,6 +298,15 @@ class FriendRank {
         
     var leaderBoard = [(maxScore: Int, player: Player)]()
     
+    func rankForScore(_ score: Int) -> Int {
+        myMaxScore = score
+        leaderBoard = leaderBoard.filter({ $0.player != .me})
+        let myBoardEntry: (maxScore: Int, player: Player) = (maxScore: self.myMaxScore, player: .me)
+        let indexToInsert = leaderBoard.index(where: {$0.maxScore < self.myMaxScore}) ?? leaderBoard.endIndex
+        leaderBoard.insert(myBoardEntry, at: indexToInsert)
+        return indexToInsert + 1
+    }
+    
     func updateRankings(completion: ((Bool) -> Void)?) {
         MBProgressHUD.showAdded(to: presentingViewController.view, animated: true)
         let url = URL(string: "https://phor.net/apps/friend-rank/api/1/rankings/" + uuid)!
@@ -307,6 +334,15 @@ class FriendRank {
                 completion?(false)
             }
         }
+    }
+    
+    func hasFriends() -> Bool {
+        for boardRow in leaderBoard {
+            if boardRow.player != .me {
+                return true
+            }
+        }
+        return false
     }
 }
 

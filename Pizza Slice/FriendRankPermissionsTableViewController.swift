@@ -98,7 +98,8 @@ class FriendRankPermissionsTableViewController: UITableViewController {
         case .leaderboard:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ranking", for: indexPath)
             let leaderBoardRow = friendRank.leaderBoard[indexPath.row]
-            cell.textLabel?.text = leaderBoardRow.player.name()
+            let text = "#\(indexPath.row + 1) " + leaderBoardRow.player.name()
+            cell.textLabel?.text = text
             cell.detailTextLabel?.text = "\(leaderBoardRow.maxScore)"
             switch leaderBoardRow.player {
             case .me:

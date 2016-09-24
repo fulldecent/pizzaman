@@ -25,7 +25,7 @@ class GameScene: SKScene {
         let retval = SKLabelNode(fontNamed: "AmericanTypewriter")
         retval.text = "SCORE"
         retval.fontColor = colorForScore(0)
-        retval.fontSize = UIDevice.current.userInterfaceIdiom == .pad ? 60 : 30
+        retval.fontSize = UIDevice.current.userInterfaceIdiom == .pad ? 60 : 26
         retval.zPosition = 10
         retval.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         retval.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
@@ -36,7 +36,7 @@ class GameScene: SKScene {
         let retval = SKLabelNode(fontNamed: "AmericanTypewriter")
         retval.text = "HIGH SCORE"
         retval.fontColor = colorForScore(0)
-        retval.fontSize = UIDevice.current.userInterfaceIdiom == .pad ? 60 : 30
+        retval.fontSize = UIDevice.current.userInterfaceIdiom == .pad ? 60 : 26
         retval.zPosition = 10
         retval.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         retval.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
@@ -46,7 +46,7 @@ class GameScene: SKScene {
     let friendRankLabel: SKLabelNode = {
         let retval = SKLabelNode(fontNamed: "AmericanTypewriter")
         retval.text = "FRIEND RANK  NONE"
-        retval.fontSize = UIDevice.current.userInterfaceIdiom == .pad ? 60 : 30
+        retval.fontSize = UIDevice.current.userInterfaceIdiom == .pad ? 60 : 26
         retval.zPosition = 10
         retval.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         retval.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
@@ -56,7 +56,7 @@ class GameScene: SKScene {
     let noFriendsLabel: SKLabelNode = {
         let retval = SKLabelNode(fontNamed: "AmericanTypewriter")
         retval.text = "NO FRIENDS"
-        retval.fontSize = UIDevice.current.userInterfaceIdiom == .pad ? 60 : 30
+        retval.fontSize = UIDevice.current.userInterfaceIdiom == .pad ? 60 : 26
         retval.zPosition = 10
         retval.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         retval.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
@@ -66,7 +66,7 @@ class GameScene: SKScene {
     let gameOverLabel: SKLabelNode = {
         let retval = SKLabelNode(fontNamed: "AmericanTypewriter-Bold")
         retval.text = "GAME OVER"
-        retval.fontSize = UIDevice.current.userInterfaceIdiom == .pad ? 60 : 30
+        retval.fontSize = UIDevice.current.userInterfaceIdiom == .pad ? 60 : 26
         retval.zPosition = 10
         retval.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         retval.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
@@ -76,7 +76,7 @@ class GameScene: SKScene {
     let achievementLabel: SKLabelNode = {
         let retval = SKLabelNode(fontNamed: "AmericanTypewriter")
         retval.text = "ACHIEVEMENT LEVEL"
-        retval.fontSize = UIDevice.current.userInterfaceIdiom == .pad ? 60 : 30
+        retval.fontSize = UIDevice.current.userInterfaceIdiom == .pad ? 60 : 26
         retval.zPosition = 10
         retval.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         retval.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
@@ -226,18 +226,27 @@ class GameScene: SKScene {
         highScoreLabel.fontColor = colorForScore(highScore)
 
         // TODO: Calculate friend rank
+        
+        friendRankLabel.text = "FRIEND RANK  #\(FriendRank.shared.rankForScore(highScore))"
         friendRankLabel.position = CGPoint(x: self.frame.midX, y: self.frame.size.height)
         addChild(friendRankLabel)
-        friendRankLabel.run(SKAction.move(to: CGPoint(x: frame.midX, y: frame.size.height * 0.7), duration: 0.2))
-
-        noFriendsLabel.position = CGPoint(x: self.frame.midX, y: 0)
-        addChild(noFriendsLabel)
-        noFriendsLabel.run(SKAction.move(to: CGPoint(x: frame.midX, y: frame.size.height * 0.3), duration: 0.2)) {
+        friendRankLabel.run(SKAction.move(to: CGPoint(x: frame.midX, y: frame.size.height * 0.7), duration: 0.2)) {
+            if FriendRank.shared.hasFriends() {
+                self.clickMe.position.x = self.friendRankLabel.position.x + self.friendRankLabel.frame.width / 2 + self.clickMe.size.width
+                self.clickMe.position.y = self.friendRankLabel.position.y
+            }
             self.clickMe.size.height = self.noFriendsLabel.frame.size.height * 1.5
             self.clickMe.size.width = self.noFriendsLabel.frame.size.height * 1.5
-            self.clickMe.position.x = self.noFriendsLabel.position.x + self.noFriendsLabel.frame.width / 2 + self.clickMe.size.width
-            self.clickMe.position.y = self.noFriendsLabel.position.y
             self.addChild(self.clickMe)
+        }
+
+        if !FriendRank.shared.hasFriends() {
+            noFriendsLabel.position = CGPoint(x: self.frame.midX, y: 0)
+            addChild(noFriendsLabel)
+            noFriendsLabel.run(SKAction.move(to: CGPoint(x: frame.midX, y: frame.size.height * 0.3), duration: 0.2)) {
+                self.clickMe.position.x = self.noFriendsLabel.position.x + self.noFriendsLabel.frame.width / 2 + self.clickMe.size.width
+                self.clickMe.position.y = self.noFriendsLabel.position.y
+            }
         }
         
         gameOverLabel.position = CGPoint(x: self.frame.midX, y: 0)
