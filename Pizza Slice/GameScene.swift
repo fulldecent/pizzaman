@@ -269,7 +269,7 @@ class GameScene: SKScene {
         self.run(SKAction.sequence([wait, setReady]))
         
         let fr = FriendRank.shared
-        fr.sendScoreToCloud(score: self.score)
+        fr.sendScoreToCloud(score: self.score, maxScore: self.highScore)
     }
     
     /* Called before each frame is rendered */

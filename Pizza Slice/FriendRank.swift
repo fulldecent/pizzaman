@@ -278,11 +278,9 @@ class FriendRank {
         }
     }
     
-    func sendScoreToCloud(score: Int) {
-        myMaxScore = score
-        var parameters: [String : Int] = [:]
-        parameters["score"] = score
-        
+    func sendScoreToCloud(score: Int, maxScore: Int) {
+        myMaxScore = maxScore
+        let parameters = ["score": score]
         let url = URL(string: "https://phor.net/apps/friend-rank/api/1/scores/" + uuid)!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -329,6 +327,7 @@ class FriendRank {
                 newLeaderBoard.insert(myBoardEntry, at: indexToInsert)
                 self.leaderBoard = newLeaderBoard
                 completion?(true)
+                print(response)
             } else {
                 // Malformed response
                 completion?(false)
