@@ -1,1 +1,1 @@
-Fixed bug. Previously, Pizza was not hungry. Now he is very hungry. Beware!
+Bug fix: now Friend Rank® shows your HIGHEST SCORE not the most recent one. Thanks Anil!
