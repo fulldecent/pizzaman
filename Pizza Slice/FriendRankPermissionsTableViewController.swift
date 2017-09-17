@@ -171,7 +171,7 @@ func height(ofText text: String, withFont font: UIFont, boundedByWidth width: CG
     return NSString(string: text).boundingRect(
         with: CGSize(width: width, height: 9999),
         options: .usesLineFragmentOrigin,
-        attributes: [NSFontAttributeName : font],
+        attributes: [NSAttributedStringKey.font : font],
         context: nil
         ).size.height
 }

@@ -87,7 +87,7 @@ class GameScene: SKScene {
     
     // MARK: - Model
     var viewRadius: CGFloat!
-    let pacManArc = M_PI * 0.45
+    let pacManArc = Double.pi * 0.45
     var pacManRadius: CGFloat!
     var score: Int = 0 {
         didSet {
@@ -133,7 +133,7 @@ class GameScene: SKScene {
         var actions = [SKAction]()
         actions.append(SKAction.setTexture(SKTexture(imageNamed: "howto1")))
         actions.append(SKAction.run {
-            let angle = CGFloat(Double(arc4random()) / 0x100000000 * 2 * M_PI)
+            let angle = CGFloat(Double(arc4random()) / 0x100000000 * 2 * Double.pi)
             self.howto.run(SKAction.rotate(byAngle: angle, duration: 0))
         })
         actions.append(SKAction.wait(forDuration: 0.3))
@@ -146,7 +146,7 @@ class GameScene: SKScene {
     func rotateToPoint(_ point: CGPoint) {
         let rotation = atan2(point.y - frame.height/2, point.x - frame.width/2)
         let rotationDifference = rotation - pacMan.zRotation
-        let differenceQuadrant14 = (rotationDifference + CGFloat(M_PI)).truncatingRemainder(dividingBy: CGFloat(2 * M_PI)) - CGFloat(M_PI)
+        let differenceQuadrant14 = (rotationDifference + CGFloat(M_PI)).truncatingRemainder(dividingBy: CGFloat(2 * Double.pi)) - CGFloat(Double.pi)
         if (differenceQuadrant14 > 0 && !turningClockwise) {
             run(ccwSound)
             turningClockwise = true
@@ -287,7 +287,7 @@ class GameScene: SKScene {
     }
     
     func launchNewPlane() {
-        let angle = CGFloat(Double(arc4random()) / 0x100000000 * 2 * M_PI)
+        let angle = CGFloat(Double(arc4random()) / 0x100000000 * 2 * Double.pi)
         let startPoint = CGPoint(x: self.viewRadius * cos(angle) + self.frame.midX,
                                      y: self.viewRadius * sin(angle) + self.frame.midY)
         let collisionPoint = CGPoint(x: self.pacManRadius * cos(angle) + self.frame.midX,

@@ -46,11 +46,11 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
     }
     
     
-    func bannerViewDidLoadAd(_ banner: ADBannerView!) {
+    func bannerViewDidLoadAd(_ banner: ADBannerView) {
         adBannerView.isHidden = false
     }
     
-    func bannerView(_ banner: ADBannerView!, didFailToReceiveAdWithError error: Error!) {
+    func bannerView(_ banner: ADBannerView, didFailToReceiveAdWithError error: Error) {
         adBannerView.isHidden = true
     }
 }
