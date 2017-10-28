@@ -1,6 +1,0 @@
-framework module Pods_Pizza_Slice {
-  umbrella header "Pods-Pizza Slice-umbrella.h"
-
-  export *
-  module * { export * }
-}
