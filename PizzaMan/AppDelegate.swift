@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func authenticateLocalPlayer(viewController: UIViewController?, error: Error?) {
-        let gcLocalPlayer = GKLocalPlayer.localPlayer()
+        let gcLocalPlayer = GKLocalPlayer.local
         let localPlayer = LocalPlayer.sharedInstance
         if viewController != nil {
             localPlayer.gameKitViewController = viewController
@@ -33,8 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        let localPlayer = GKLocalPlayer.localPlayer()
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        let localPlayer = GKLocalPlayer.local
         localPlayer.authenticateHandler = authenticateLocalPlayer
         return true
     }

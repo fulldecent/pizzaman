@@ -53,7 +53,7 @@ class GameScene: SKScene {
     let pizzaManArc = CGFloat(Double.pi * 0.45)
     var turningClockwise = true
     var nextPepperoniLaunch:CFTimeInterval = 0
-
+    
     override func didMove(to view: SKView) {
         viewRadius = hypot(view.frame.width, view.frame.height) / 2
         pizzaManRadius = viewRadius * 0.08
@@ -69,6 +69,11 @@ class GameScene: SKScene {
         emitterNode.zPosition = -10
         emitterNode.isUserInteractionEnabled = false
         self.addChild(emitterNode)
+
+        let cameraNode = SKCameraNode()
+        cameraNode.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
+        self.addChild(cameraNode)
+        self.camera = cameraNode
 
         switchToInstructionState()
     }
@@ -130,6 +135,9 @@ class GameScene: SKScene {
             UserDefaults.standard.set(highScore, forKey: "maxScore")
         }
         
+        let zoomInAction = SKAction.scale(to: 1, duration: 1)
+        self.camera!.run(zoomInAction)
+        
         gameOverLabel.text = "GAME OVER"
         gameOverLabel.color = UIColor.white
         gameOverLabel.position = CGPoint(x: self.frame.midX, y: 0)
@@ -153,7 +161,7 @@ class GameScene: SKScene {
         switchToInstructionState()
         
         // Report score to Apple
-        let gcLocalPlayer = GKLocalPlayer.localPlayer()
+        let gcLocalPlayer = GKLocalPlayer.local
         if gcLocalPlayer.isAuthenticated {
             let gkScore = GKScore(leaderboardIdentifier: "main")
             gkScore.value = Int64(score)
@@ -171,7 +179,7 @@ class GameScene: SKScene {
             return
         }
         
-        let gkLocalPlayer = GKLocalPlayer.localPlayer()
+        let gkLocalPlayer = GKLocalPlayer.local
         if gkLocalPlayer.isAuthenticated {
             let gcViewController = GKGameCenterViewController()
             gcViewController.gameCenterDelegate = self
@@ -234,8 +242,14 @@ class GameScene: SKScene {
             if Double(cos(angle - self.pizzaMan.zRotation)) > Double(cos(self.pizzaManArc/2)) {
                 self.score += 1
                 self.run(self.playEatSound)
-                let color = colorForScore(self.score)
-                self.pizzaMan.fillColor = color
+                self.pizzaMan.fillColor = colorForScore(self.score)
+
+                if (self.score % 10 == 0) {
+                    let newScale = CGFloat(1) - CGFloat(self.score) / 100
+                    let zoomInAction = SKAction.scale(to: newScale, duration: 0.5)
+                    self.camera!.run(zoomInAction)
+                }
+            
             } else {
                 self.gameOver()
             }
@@ -316,7 +330,7 @@ class HowtoNode: SKShapeNode {
 
 public extension Double {
     /// Returns a random floating point number between 0.0 and 1.0, inclusive.
-    public static func random() -> Double {
+    static func random() -> Double {
         return Double(arc4random()) / 0xFFFFFFFF
     }
 }
@@ -346,23 +360,23 @@ func achievementLevelForScore(_ score: Int) -> String {
     case 0...9:
         return "Bad"
     case 10...19:
-        return "Eh"
-    case 20...29:
         return "Meh"
-    case 30...39:
+    case 20...29:
         return "Fair"
-    case 40...49:
+    case 30...39:
         return "Decent"
-    case 50...59:
+    case 40...49:
         return "OK"
-    case 60...69:
+    case 50...59:
         return "Cool"
-    case 70...79:
+    case 60...69:
         return "Good"
-    case 80...89:
+    case 70...79:
         return "Better"
-    case 90...99:
+    case 80...89:
         return "Wild"
+    case 90...99:
+        return "Beast"
     case 100...109:
         return "Beast"
     case 110...119:
