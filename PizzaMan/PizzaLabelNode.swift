@@ -9,10 +9,16 @@
 import SpriteKit
 
 class PizzaLabelNode: SKLabelNode {
-    override init() {
+    override init(fontNamed: String?) {
         super.init()
-        fontName = "AmericanTypewriter"
-        fontSize = UIDevice.current.userInterfaceIdiom == .pad ? 60 : 26
+        self.fontName = fontNamed
+        
+        if fontNamed == "SNES-Italic" {
+            fontSize = UIDevice.current.userInterfaceIdiom == .pad ? 140 : 72
+        } else {
+            fontSize = UIDevice.current.userInterfaceIdiom == .pad ? 60 : 26
+        }
+        
         zPosition = 10
         horizontalAlignmentMode = .center
         verticalAlignmentMode = .center
