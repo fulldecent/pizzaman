@@ -21,11 +21,11 @@ class GameScene: SKScene {
     // MARK: Nodes
     var pizzaMan: PizzaManShapeNode!
     var howtoNode: HowtoNode!
-    let scoreLabel = PizzaLabelNode()
-    let highScoreLabel = PizzaLabelNode()
-    let leaderboardLabel = PizzaLabelNode()
+    let scoreLabel = PizzaLabelNode(fontNamed: "AmericanTypewriter-Bold")
+    let highScoreLabel = PizzaLabelNode(fontNamed: "AmericanTypewriter-Bold")
+    let leaderboardLabel = PizzaLabelNode(fontNamed: "AmericanTypewriter-Bold")
     let moreDetails = SKSpriteNode(imageNamed: "moreDetails")
-    let gameOverLabel = PizzaLabelNode()
+    let gameOverLabel = PizzaLabelNode(fontNamed: "SNES-Italic")
 
     // MARK: Game state
     enum GameState {

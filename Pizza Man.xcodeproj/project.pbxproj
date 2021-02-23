@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3EB1702D25E2CF3A008223A5 /* SnesItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3EB1702C25E2CF3A008223A5 /* SnesItalic.ttf */; };
 		D90EB37A1F8EF71D00AB226F /* moreDetails.png in Resources */ = {isa = PBXBuildFile; fileRef = D90EB3791F8EF71900AB226F /* moreDetails.png */; };
 		D90EB37D1F8EFAC400AB226F /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D90EB37C1F8EFAC400AB226F /* GameKit.framework */; };
 		D994164E1F8EC818007BA9AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D994164D1F8EC818007BA9AA /* AppDelegate.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3EB1702C25E2CF3A008223A5 /* SnesItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SnesItalic.ttf; sourceTree = "<group>"; };
 		D90EB3791F8EF71900AB226F /* moreDetails.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = moreDetails.png; sourceTree = "<group>"; };
 		D90EB37C1F8EFAC400AB226F /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		D90EB37E1F8EFF4800AB226F /* PizzaSlice.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PizzaSlice.entitlements; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				D90EB37E1F8EFF4800AB226F /* PizzaSlice.entitlements */,
+				3EB1702C25E2CF3A008223A5 /* SnesItalic.ttf */,
 				D994164D1F8EC818007BA9AA /* AppDelegate.swift */,
 				D9A182D31FA4D842000A590C /* LocalPlayer.swift */,
 				D99416551F8EC818007BA9AA /* GameViewController.swift */,
@@ -192,6 +195,7 @@
 				D994167E1F8ED3BE007BA9AA /* howto.png in Resources */,
 				D994167D1F8ED379007BA9AA /* StarField.sks in Resources */,
 				D994165E1F8EC818007BA9AA /* LaunchScreen.storyboard in Resources */,
+				3EB1702D25E2CF3A008223A5 /* SnesItalic.ttf in Resources */,
 				D99416841F8EE25B007BA9AA /* pepperoni.png in Resources */,
 				D99416801F8ED3D0007BA9AA /* cw.caf in Resources */,
 			);
