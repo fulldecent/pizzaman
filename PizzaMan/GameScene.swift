@@ -52,7 +52,7 @@ class GameScene: SKScene {
     var pizzaManRadius: CGFloat!
     let pizzaManArc = CGFloat(Double.pi * 0.45)
     var turningClockwise = true
-    var nextPepperoniLaunch:CFTimeInterval = 0
+    var nextPizzaLaunch:CFTimeInterval = 0
     
     override func didMove(to view: SKView) {
         viewRadius = hypot(view.frame.width, view.frame.height) / 2
@@ -126,7 +126,7 @@ class GameScene: SKScene {
         }
         run(playDieSound)
         
-        enumerateChildNodes(withName: "pepperoni") { (topping, _) in
+        enumerateChildNodes(withName: "pizza") { (topping, _) in
             topping.removeFromParent()
         }
         
@@ -212,12 +212,12 @@ class GameScene: SKScene {
         guard gameState == .playing else {
             return
         }
-        guard currentTime >= nextPepperoniLaunch else {
+        guard currentTime >= nextPizzaLaunch else {
             return
         }
         
         let interval:TimeInterval = 0.15 + 2/(Double(score) + 1)
-        nextPepperoniLaunch = currentTime + interval
+        nextPizzaLaunch = currentTime + interval
         launchNewTopping()
     }
     
@@ -229,10 +229,9 @@ class GameScene: SKScene {
                                      y: pizzaManRadius * sin(angle) + frame.midY)
         let middlePoint = CGPoint(x: frame.midX, y: frame.midY)
         
-        let topping = SKSpriteNode(imageNamed: "pepperoni")
+        let topping = SKLabelNode(text: "🍕")
         topping.position = startPoint
-        topping.name = "pepperoni"
-        topping.size = CGSize(width: self.viewRadius * 0.05, height: self.viewRadius * 0.05)
+        topping.name = "pizza"
         self.addChild(topping)
         
         let approachPacMac = SKAction.move(to: collisionPoint, duration: 5)
