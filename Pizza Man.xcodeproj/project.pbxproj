@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		153B65FB267BB4BC00F791F0 /* cheese_pizza.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 153B65F8267BB4BC00F791F0 /* cheese_pizza.jpeg */; };
-		153B65FC267BB4BC00F791F0 /* pizza.png in Resources */ = {isa = PBXBuildFile; fileRef = 153B65F9267BB4BC00F791F0 /* pizza.png */; };
-		153B65FD267BB4BC00F791F0 /* pizza_pepperoni.png in Resources */ = {isa = PBXBuildFile; fileRef = 153B65FA267BB4BC00F791F0 /* pizza_pepperoni.png */; };
 		3EB1702D25E2CF3A008223A5 /* SnesItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3EB1702C25E2CF3A008223A5 /* SnesItalic.ttf */; };
 		D90EB37A1F8EF71D00AB226F /* moreDetails.png in Resources */ = {isa = PBXBuildFile; fileRef = D90EB3791F8EF71900AB226F /* moreDetails.png */; };
 		D90EB37D1F8EFAC400AB226F /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D90EB37C1F8EFAC400AB226F /* GameKit.framework */; };
@@ -26,15 +23,11 @@
 		D99416801F8ED3D0007BA9AA /* cw.caf in Resources */ = {isa = PBXBuildFile; fileRef = D99416741F8ECB21007BA9AA /* cw.caf */; };
 		D99416811F8ED3D0007BA9AA /* die.caf in Resources */ = {isa = PBXBuildFile; fileRef = D99416731F8ECB21007BA9AA /* die.caf */; };
 		D99416821F8ED3D0007BA9AA /* eat.caf in Resources */ = {isa = PBXBuildFile; fileRef = D99416761F8ECB22007BA9AA /* eat.caf */; };
-		D99416841F8EE25B007BA9AA /* pepperoni.png in Resources */ = {isa = PBXBuildFile; fileRef = D99416831F8EE22A007BA9AA /* pepperoni.png */; };
 		D9A182D41FA4D842000A590C /* LocalPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A182D31FA4D842000A590C /* LocalPlayer.swift */; };
 		D9A182D81FA4ED62000A590C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9A182D71FA4ED62000A590C /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		153B65F8267BB4BC00F791F0 /* cheese_pizza.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cheese_pizza.jpeg; sourceTree = "<group>"; };
-		153B65F9267BB4BC00F791F0 /* pizza.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pizza.png; sourceTree = "<group>"; };
-		153B65FA267BB4BC00F791F0 /* pizza_pepperoni.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pizza_pepperoni.png; sourceTree = "<group>"; };
 		3EB1702C25E2CF3A008223A5 /* SnesItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SnesItalic.ttf; sourceTree = "<group>"; };
 		D90EB3791F8EF71900AB226F /* moreDetails.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = moreDetails.png; sourceTree = "<group>"; };
 		D90EB37C1F8EFAC400AB226F /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
@@ -54,7 +47,6 @@
 		D99416771F8ECBBF007BA9AA /* PizzaLabelNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaLabelNode.swift; sourceTree = "<group>"; };
 		D994167B1F8ED03F007BA9AA /* StarField.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StarField.sks; sourceTree = "<group>"; };
 		D994167C1F8ED21A007BA9AA /* howto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = howto.png; sourceTree = "<group>"; };
-		D99416831F8EE22A007BA9AA /* pepperoni.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pepperoni.png; sourceTree = "<group>"; };
 		D9A182D31FA4D842000A590C /* LocalPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPlayer.swift; sourceTree = "<group>"; };
 		D9A182D71FA4ED62000A590C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -74,7 +66,6 @@
 		153B65FF267BBC4D00F791F0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				153B6600267BBC9100F791F0 /* pepperronis */,
 				D994167C1F8ED21A007BA9AA /* howto.png */,
 				D90EB3791F8EF71900AB226F /* moreDetails.png */,
 				D99416751F8ECB21007BA9AA /* ccw.caf */,
@@ -83,17 +74,6 @@
 				D99416761F8ECB22007BA9AA /* eat.caf */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		153B6600267BBC9100F791F0 /* pepperronis */ = {
-			isa = PBXGroup;
-			children = (
-				153B65F8267BB4BC00F791F0 /* cheese_pizza.jpeg */,
-				153B65FA267BB4BC00F791F0 /* pizza_pepperoni.png */,
-				153B65F9267BB4BC00F791F0 /* pizza.png */,
-				D99416831F8EE22A007BA9AA /* pepperoni.png */,
-			);
-			path = pepperronis;
 			sourceTree = "<group>";
 		};
 		D90EB37B1F8EFAC400AB226F /* Frameworks */ = {
@@ -213,10 +193,7 @@
 				D994167F1F8ED3D0007BA9AA /* ccw.caf in Resources */,
 				D99416811F8ED3D0007BA9AA /* die.caf in Resources */,
 				D99416591F8EC818007BA9AA /* Main.storyboard in Resources */,
-				153B65FB267BB4BC00F791F0 /* cheese_pizza.jpeg in Resources */,
 				D99416821F8ED3D0007BA9AA /* eat.caf in Resources */,
-				153B65FD267BB4BC00F791F0 /* pizza_pepperoni.png in Resources */,
-				153B65FC267BB4BC00F791F0 /* pizza.png in Resources */,
 				D994165B1F8EC818007BA9AA /* Assets.xcassets in Resources */,
 				D9A182D81FA4ED62000A590C /* Default-568h@2x.png in Resources */,
 				D90EB37A1F8EF71D00AB226F /* moreDetails.png in Resources */,
@@ -224,7 +201,6 @@
 				D994167D1F8ED379007BA9AA /* StarField.sks in Resources */,
 				D994165E1F8EC818007BA9AA /* LaunchScreen.storyboard in Resources */,
 				3EB1702D25E2CF3A008223A5 /* SnesItalic.ttf in Resources */,
-				D99416841F8EE25B007BA9AA /* pepperoni.png in Resources */,
 				D99416801F8ED3D0007BA9AA /* cw.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
