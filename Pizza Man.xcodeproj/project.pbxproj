@@ -23,7 +23,6 @@
 		D99416801F8ED3D0007BA9AA /* cw.caf in Resources */ = {isa = PBXBuildFile; fileRef = D99416741F8ECB21007BA9AA /* cw.caf */; };
 		D99416811F8ED3D0007BA9AA /* die.caf in Resources */ = {isa = PBXBuildFile; fileRef = D99416731F8ECB21007BA9AA /* die.caf */; };
 		D99416821F8ED3D0007BA9AA /* eat.caf in Resources */ = {isa = PBXBuildFile; fileRef = D99416761F8ECB22007BA9AA /* eat.caf */; };
-		D99416841F8EE25B007BA9AA /* pepperoni.png in Resources */ = {isa = PBXBuildFile; fileRef = D99416831F8EE22A007BA9AA /* pepperoni.png */; };
 		D9A182D41FA4D842000A590C /* LocalPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A182D31FA4D842000A590C /* LocalPlayer.swift */; };
 		D9A182D81FA4ED62000A590C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9A182D71FA4ED62000A590C /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
@@ -48,7 +47,6 @@
 		D99416771F8ECBBF007BA9AA /* PizzaLabelNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaLabelNode.swift; sourceTree = "<group>"; };
 		D994167B1F8ED03F007BA9AA /* StarField.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StarField.sks; sourceTree = "<group>"; };
 		D994167C1F8ED21A007BA9AA /* howto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = howto.png; sourceTree = "<group>"; };
-		D99416831F8EE22A007BA9AA /* pepperoni.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pepperoni.png; sourceTree = "<group>"; };
 		D9A182D31FA4D842000A590C /* LocalPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPlayer.swift; sourceTree = "<group>"; };
 		D9A182D71FA4ED62000A590C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,6 +63,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		153B65FF267BBC4D00F791F0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D994167C1F8ED21A007BA9AA /* howto.png */,
+				D90EB3791F8EF71900AB226F /* moreDetails.png */,
+				D99416751F8ECB21007BA9AA /* ccw.caf */,
+				D99416741F8ECB21007BA9AA /* cw.caf */,
+				D99416731F8ECB21007BA9AA /* die.caf */,
+				D99416761F8ECB22007BA9AA /* eat.caf */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		D90EB37B1F8EFAC400AB226F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -105,14 +116,8 @@
 				D994165A1F8EC818007BA9AA /* Assets.xcassets */,
 				D994165C1F8EC818007BA9AA /* LaunchScreen.storyboard */,
 				D994165F1F8EC818007BA9AA /* Info.plist */,
-				D99416751F8ECB21007BA9AA /* ccw.caf */,
-				D99416741F8ECB21007BA9AA /* cw.caf */,
-				D99416731F8ECB21007BA9AA /* die.caf */,
-				D99416761F8ECB22007BA9AA /* eat.caf */,
 				D994167B1F8ED03F007BA9AA /* StarField.sks */,
-				D994167C1F8ED21A007BA9AA /* howto.png */,
-				D99416831F8EE22A007BA9AA /* pepperoni.png */,
-				D90EB3791F8EF71900AB226F /* moreDetails.png */,
+				153B65FF267BBC4D00F791F0 /* Resources */,
 			);
 			path = PizzaMan;
 			sourceTree = "<group>";
@@ -196,7 +201,6 @@
 				D994167D1F8ED379007BA9AA /* StarField.sks in Resources */,
 				D994165E1F8EC818007BA9AA /* LaunchScreen.storyboard in Resources */,
 				3EB1702D25E2CF3A008223A5 /* SnesItalic.ttf in Resources */,
-				D99416841F8EE25B007BA9AA /* pepperoni.png in Resources */,
 				D99416801F8ED3D0007BA9AA /* cw.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

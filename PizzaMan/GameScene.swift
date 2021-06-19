@@ -46,7 +46,10 @@ class GameScene: SKScene {
             self.highScoreLabel.fontColor = colorForScore(self.highScore)
         }
     }
-
+    
+    let pizzaImages = ["pepperoni","cheese_pizza","pizza_pepperoni","pizza"]
+    
+    
     // MARK: Other variables
     var viewRadius: CGFloat!
     var pizzaManRadius: CGFloat!
@@ -229,7 +232,7 @@ class GameScene: SKScene {
                                      y: pizzaManRadius * sin(angle) + frame.midY)
         let middlePoint = CGPoint(x: frame.midX, y: frame.midY)
         
-        let topping = SKSpriteNode(imageNamed: "pepperoni")
+        let topping = SKSpriteNode(imageNamed: pizzaImages.randomElement() ?? "pepperoni")
         topping.position = startPoint
         topping.name = "pepperoni"
         topping.size = CGSize(width: self.viewRadius * 0.05, height: self.viewRadius * 0.05)
