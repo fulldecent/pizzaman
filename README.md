@@ -17,6 +17,25 @@ You will become immortal (in real life) if you reach level 100.
 
 ---
 
+## Development
+
+### Requirements
+- Xcode 15.0+
+- iOS 15.0+
+- Swift 5.9+
+
+### Building
+This project uses modern iOS development practices and can be built using Xcode or the command line:
+
+```bash
+xcodebuild -project "Pizza Man.xcodeproj" -scheme "Pizza Man" -configuration Debug -destination "platform=iOS Simulator,name=iPhone 15,OS=latest" build
+```
+
+### Continuous Integration
+The project includes GitHub Actions CI that automatically builds and tests the app on every push and pull request.
+
+---
+
 The app is named because the hero (at center) is a pizza. The things that he is eating are pepperoni.
 
 ![Screen Shot](https://user-images.githubusercontent.com/382183/111934259-730f2800-8a97-11eb-93b4-0f8271be7700.jpg)
