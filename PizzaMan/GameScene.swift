@@ -54,6 +54,10 @@ class GameScene: SKScene {
     var turningClockwise = true
     var nextPepperoniLaunch:CFTimeInterval = 0
     
+    // MARK: Topping mode
+    var useEmojiToppings = false
+    let emojiToppings = ["🍕", "🍔", "🌭", "🥓", "🧀", "🍖", "🥩", "🌮", "🥪", "🥙", "🍳", "🥯", "🥖", "🍞", "🥞"]
+    
     override func didMove(to view: SKView) {
         viewRadius = hypot(view.frame.width, view.frame.height) / 2
         pizzaManRadius = viewRadius * 0.08
@@ -126,9 +130,16 @@ class GameScene: SKScene {
         }
         run(playDieSound)
         
+        // Remove all toppings (both pepperoni and emoji types)
         enumerateChildNodes(withName: "pepperoni") { (topping, _) in
             topping.removeFromParent()
         }
+        enumerateChildNodes(withName: "topping") { (topping, _) in
+            topping.removeFromParent()
+        }
+        
+        // Switch to emoji mode after each game
+        useEmojiToppings = true
         
         if score > highScore {
             highScore = score
@@ -221,6 +232,11 @@ class GameScene: SKScene {
         launchNewTopping()
     }
     
+    func getRandomEmoji() -> String {
+        let randomIndex = Int.random(in: 0..<emojiToppings.count)
+        return emojiToppings[randomIndex]
+    }
+    
     func launchNewTopping() {
         let angle = CGFloat(Double.random() * 2 * Double.pi)
         let startPoint = CGPoint(x: viewRadius * cos(angle) + frame.midX,
@@ -229,10 +245,21 @@ class GameScene: SKScene {
                                      y: pizzaManRadius * sin(angle) + frame.midY)
         let middlePoint = CGPoint(x: frame.midX, y: frame.midY)
         
-        let topping = SKSpriteNode(imageNamed: "pepperoni")
+        let topping: SKNode
+        if useEmojiToppings {
+            let emojiLabel = SKLabelNode(text: getRandomEmoji())
+            emojiLabel.fontSize = self.viewRadius * 0.04
+            emojiLabel.horizontalAlignmentMode = .center
+            emojiLabel.verticalAlignmentMode = .center
+            topping = emojiLabel
+            topping.name = "topping"
+        } else {
+            let spriteTopping = SKSpriteNode(imageNamed: "pepperoni")
+            spriteTopping.size = CGSize(width: self.viewRadius * 0.05, height: self.viewRadius * 0.05)
+            topping = spriteTopping
+            topping.name = "pepperoni"
+        }
         topping.position = startPoint
-        topping.name = "pepperoni"
-        topping.size = CGSize(width: self.viewRadius * 0.05, height: self.viewRadius * 0.05)
         self.addChild(topping)
         
         let approachPacMac = SKAction.move(to: collisionPoint, duration: 5)
