@@ -331,7 +331,7 @@ class HowtoNode: SKShapeNode {
 public extension Double {
     /// Returns a random floating point number between 0.0 and 1.0, inclusive.
     static func random() -> Double {
-        return Double(arc4random()) / 0xFFFFFFFF
+        return Double.random(in: 0.0...1.0)
     }
 }
 
