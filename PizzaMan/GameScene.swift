@@ -56,7 +56,7 @@ class GameScene: SKScene {
     
     // MARK: Topping mode
     var useEmojiToppings = false
-    let emojiToppings = ["🍕", "🍔", "🌭", "🥓", "🧀", "🍖", "🥩", "🌮", "🥪", "🥙", "🍳", "🥯", "🥖", "🍞", "🥞"]
+    let emojiToppings = ["🍕", "🍅", "🧀", "🌿", "🍄", "🫑", "🧅", "🫒", "🍖", "🥓", "🍗", "🥩", "🌶️", "🍍", "🥦", "🍤", "🌽", "🥚"]
     var currentGameEmoji = ""
     
     override func didMove(to view: SKView) {
