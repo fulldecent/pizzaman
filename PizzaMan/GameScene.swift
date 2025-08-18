@@ -57,6 +57,7 @@ class GameScene: SKScene {
     // MARK: Topping mode
     var useEmojiToppings = false
     let emojiToppings = ["🍕", "🍔", "🌭", "🥓", "🧀", "🍖", "🥩", "🌮", "🥪", "🥙", "🍳", "🥯", "🥖", "🍞", "🥞"]
+    var currentGameEmoji = ""
     
     override func didMove(to view: SKView) {
         viewRadius = hypot(view.frame.width, view.frame.height) / 2
@@ -104,6 +105,11 @@ class GameScene: SKScene {
         howtoNode.removeFromParent()
         gameOverLabel.removeFromParent()
         moreDetails.removeFromParent()
+        
+        // Pick emoji for this game if in emoji mode
+        if useEmojiToppings {
+            currentGameEmoji = getRandomEmoji()
+        }
         
         score = 0
         scoreLabel.removeFromParent()
@@ -245,7 +251,7 @@ class GameScene: SKScene {
         
         let topping: SKNode
         if useEmojiToppings {
-            let emojiLabel = SKLabelNode(text: getRandomEmoji())
+            let emojiLabel = SKLabelNode(text: currentGameEmoji)
             emojiLabel.fontSize = self.viewRadius * 0.04
             emojiLabel.horizontalAlignmentMode = .center
             emojiLabel.verticalAlignmentMode = .center
