@@ -161,12 +161,7 @@ class GameScene: SKScene {
         switchToInstructionState()
         
         // Report score to Apple
-        let gcLocalPlayer = GKLocalPlayer.local
-        if gcLocalPlayer.isAuthenticated {
-            let gkScore = GKScore(leaderboardIdentifier: "main")
-            gkScore.value = Int64(score)
-            GKScore.report([gkScore], withCompletionHandler: nil)
-        }
+        GKLeaderboard.submitScore(score, context: 0, player: GKLocalPlayer.local, leaderboardIDs: ["main"]) {_ in }
     }
     
     func showLeaderboard() {
@@ -181,13 +176,16 @@ class GameScene: SKScene {
         
         let gkLocalPlayer = GKLocalPlayer.local
         if gkLocalPlayer.isAuthenticated {
-            let gcViewController = GKGameCenterViewController()
-            gcViewController.gameCenterDelegate = self
-            gcViewController.viewState = .leaderboards
-            gcViewController.leaderboardTimeScope = .allTime
-            gcViewController.leaderboardIdentifier = "main"
-            self.viewController.present(gcViewController, animated: true, completion: nil)
-            return
+            let accessPoint = GKAccessPoint.shared
+            accessPoint.location = .topLeading
+            accessPoint.showHighlights = true
+            accessPoint.isActive = true
+            GKLeaderboard.loadLeaderboards(IDs: ["main"]) { leaderboards, error in
+                if let error = error {
+                    print("Error loading leaderboards: \(error.localizedDescription)")
+                    return
+                }
+            }
         }
     }
     
@@ -331,7 +329,7 @@ class HowtoNode: SKShapeNode {
 public extension Double {
     /// Returns a random floating point number between 0.0 and 1.0, inclusive.
     static func random() -> Double {
-        return Double(arc4random()) / 0xFFFFFFFF
+        return Double.random(in: 0.0...1.0)
     }
 }
 
