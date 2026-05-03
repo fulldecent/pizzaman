@@ -1,0 +1,182 @@
+default_platform(:ios)
+
+XCODEPROJ = "Pizza Man.xcodeproj"
+SCHEME    = "Pizza Man"
+PLIST     = "PizzaMan/Info.plist"
+
+platform :ios do
+  before_all do
+    # Xcode 26's IPA packaging step shells out to /usr/bin/rsync (openrsync),
+    # which then spawns its receiver subprocess via PATH. If Homebrew rsync
+    # (3.x) is in PATH, the two halves disagree on the meaning of the `-E`
+    # flag and exportArchive fails with "Copy failed". Strip Homebrew out of
+    # PATH so both sides resolve to the same openrsync binary.
+    sanitized = ENV["PATH"].split(":").reject { |p| p.start_with?("/opt/homebrew", "/usr/local") }
+    ENV["PATH"] = sanitized.join(":")
+
+    config_path = File.expand_path("api_key.json", __dir__)
+    if File.exist?(config_path)
+      config = JSON.parse(File.read(config_path))
+      app_store_connect_api_key(
+        key_id: config["key_id"],
+        issuer_id: config["issuer_id"],
+        key_filepath: config["key_filepath"],
+        in_house: config.fetch("in_house", false)
+      )
+    end
+  end
+
+  desc "Bump the marketing version. Pass bump:patch (default), bump:minor, or bump:major"
+  lane :bump_version do |options|
+    bump_type = options[:bump] || "patch"
+    current = get_info_plist_value(path: PLIST, key: "CFBundleShortVersionString")
+    parts = current.split(".").map(&:to_i)
+    parts << 0 while parts.length < 3
+    case bump_type
+    when "major" then parts = [parts[0] + 1, 0, 0]
+    when "minor" then parts = [parts[0], parts[1] + 1, 0]
+    else              parts = [parts[0], parts[1], parts[2] + 1]
+    end
+    new_version = parts.join(".")
+    set_info_plist_value(path: PLIST, key: "CFBundleShortVersionString", value: new_version)
+    bump_build
+    UI.success("Bumped to #{new_version} (build #{get_info_plist_value(path: PLIST, key: 'CFBundleVersion')})")
+    UI.message("Don't forget to update app_version in fastlane/Deliverfile to \"#{new_version}\".")
+  end
+
+  desc "Bump only the build number (used before each beta upload)"
+  lane :bump_build do
+    current = get_info_plist_value(path: PLIST, key: "CFBundleVersion").to_i
+    set_info_plist_value(path: PLIST, key: "CFBundleVersion", value: (current + 1).to_s)
+  end
+
+  desc "Generate App Store screenshots"
+  lane :screenshots do
+    capture_screenshots
+  end
+
+  desc "Upload local screenshots to the editable App Store version"
+  lane :upload_screenshots do
+    upload_to_app_store
+  end
+
+  desc "Generate screenshots and upload them to App Store Connect"
+  lane :screenshots_and_upload do
+    capture_screenshots
+    upload_to_app_store
+  end
+
+  desc "Build a signed release .ipa, upload it to TestFlight, then bump the build number for next time"
+  lane :beta do
+    bump_build
+    build_app(
+      project: XCODEPROJ,
+      scheme: SCHEME,
+      configuration: "Release",
+      export_method: "app-store",
+      clean: true,
+      output_directory: "build",
+      output_name: "Pizza Man.ipa"
+    )
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true,
+      skip_submission: true
+    )
+  end
+
+  desc "Build the signed release .ipa without uploading (for testing the build pipeline)"
+  lane :build_release do
+    build_app(
+      project: XCODEPROJ,
+      scheme: SCHEME,
+      configuration: "Release",
+      export_method: "app-store",
+      clean: true,
+      output_directory: "build",
+      output_name: "Pizza Man.ipa"
+    )
+  end
+
+  desc "Full App Store release: capture screenshots, attach the latest TestFlight build, submit for review"
+  lane :release do |options|
+    notes = options[:notes]
+    if notes.nil? || notes.strip.empty?
+      notes = UI.input("Release notes (What's New) for en-US:")
+    end
+    UI.user_error!("Release notes are required to submit for review") if notes.nil? || notes.strip.empty?
+
+    capture_screenshots
+    upload_to_app_store(
+      skip_binary_upload: true,
+      skip_metadata: false,
+      skip_screenshots: false,
+      release_notes: { "en-US" => notes },
+      submit_for_review: true,
+      automatic_release: true,
+      submission_information: {
+        add_id_info_uses_idfa: false,
+        export_compliance_uses_encryption: false,
+        content_rights_contains_third_party_content: false
+      }
+    )
+  end
+
+  desc "Recover from a failed release: update release notes on the latest version, drop any orphan draft submission, then create and submit a fresh one"
+  lane :submit_only do |options|
+    notes = options[:notes]
+    if notes.nil? || notes.strip.empty?
+      notes = UI.input("Release notes (What's New) for en-US:")
+    end
+    UI.user_error!("Release notes are required to submit for review") if notes.nil? || notes.strip.empty?
+
+    require "spaceship"
+
+    app_identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
+    app = Spaceship::ConnectAPI::App.find(app_identifier)
+    UI.user_error!("App #{app_identifier} not found") unless app
+
+    platform = Spaceship::ConnectAPI::Platform::IOS
+
+    edit_states = [
+      Spaceship::ConnectAPI::AppStoreVersion::AppVersionState::PREPARE_FOR_SUBMISSION,
+      Spaceship::ConnectAPI::AppStoreVersion::AppVersionState::READY_FOR_REVIEW,
+      Spaceship::ConnectAPI::AppStoreVersion::AppVersionState::DEVELOPER_REJECTED,
+      Spaceship::ConnectAPI::AppStoreVersion::AppVersionState::REJECTED,
+      Spaceship::ConnectAPI::AppStoreVersion::AppVersionState::METADATA_REJECTED,
+      Spaceship::ConnectAPI::AppStoreVersion::AppVersionState::WAITING_FOR_REVIEW,
+      Spaceship::ConnectAPI::AppStoreVersion::AppVersionState::INVALID_BINARY
+    ]
+    version = app.get_app_store_versions(filter: { appVersionState: edit_states.join(","), platform: platform })
+                 .sort_by { |v| Gem::Version.new(v.version_string) }
+                 .last
+    UI.user_error!("No editable App Store version found for #{app_identifier}") unless version
+    UI.message("Working with version #{version.version_string} (state: #{version.app_version_state})")
+
+    localization = version.get_app_store_version_localizations(filter: { locale: "en-US" }).first
+    UI.user_error!("No en-US localization found on version #{version.version_string}") unless localization
+    if localization.whats_new.to_s.strip != notes.strip
+      UI.message("Updating en-US release notes")
+      localization.update(attributes: { whatsNew: notes })
+    else
+      UI.message("en-US release notes already match")
+    end
+
+    in_progress = app.get_in_progress_review_submission(platform: platform)
+    UI.user_error!("Cannot submit - a review submission is already in progress (state: #{in_progress.state})") if in_progress
+
+    submission = app.get_ready_review_submission(platform: platform, includes: "items")
+    if submission.nil?
+      submission = app.create_review_submission(platform: platform)
+      submission.add_app_store_version_to_review_items(app_store_version_id: version.id)
+    elsif submission.items.to_a.empty?
+      UI.message("Reusing empty draft submission #{submission.id}")
+      submission.add_app_store_version_to_review_items(app_store_version_id: version.id)
+    else
+      UI.message("Reusing draft submission #{submission.id} with #{submission.items.size} item(s)")
+    end
+
+    submission.submit_for_review
+    UI.success("Submitted #{version.version_string} for review")
+  end
+end
+

@@ -34,6 +34,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Skip Game Center authentication when running under fastlane snapshot
+        // so the sign-in sheet does not appear in screenshots.
+        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+            return true
+        }
         let localPlayer = GKLocalPlayer.local
         localPlayer.authenticateHandler = authenticateLocalPlayer
         return true

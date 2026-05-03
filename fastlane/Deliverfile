@@ -1,0 +1,28 @@
+# Deliverfile — configuration for `fastlane deliver`
+# Docs: https://docs.fastlane.tools/actions/deliver/
+
+app_identifier("net.phor.PizzaSlice")
+
+# The App Store version this lane is targeting. `upload_to_app_store` will
+# create this version on App Store Connect if it does not already exist.
+app_version("4.0.1")
+
+# Upload screenshots from the directory snapshot writes to
+screenshots_path("./fastlane/screenshots")
+
+# Don't upload the binary or metadata when only pushing screenshots
+skip_binary_upload(true)
+skip_metadata(true)
+skip_app_version_update(false)
+
+# Replace any screenshots already on App Store Connect for this version
+overwrite_screenshots(true)
+
+# Set to true to actually submit for review after upload
+submit_for_review(false)
+
+force(true) # don't prompt for HTML preview
+
+# precheck doesn't support API key + IAP yet; we aren't submitting from here
+# anyway, so skip it.
+run_precheck_before_submit(false)

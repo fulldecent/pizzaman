@@ -1,0 +1,34 @@
+# Snapfile — configuration for `fastlane snapshot`
+# Docs: https://docs.fastlane.tools/actions/snapshot/
+
+# Devices to capture. Only 6.9" iPhone and 13" iPad are required by App Store
+# Connect for new submissions.
+devices([
+  "iPhone 16 Pro Max",      # 6.9"
+  "iPad Pro 13-inch (M4)"   # 13"
+])
+
+languages([
+  "en-US"
+])
+
+# Where to save screenshots
+output_directory("./fastlane/screenshots")
+
+# Clear previously generated screenshots before creating new ones
+clear_previous_screenshots(true)
+
+# The Xcode scheme that contains the UI tests
+scheme("Pizza Man")
+
+# Project (workspace would be used if you had one)
+project("./Pizza Man.xcodeproj")
+
+# Don't open the HTML summary after capturing
+skip_open_summary(true)
+
+# Override status bar (clean signal/wifi/100% battery in screenshots)
+override_status_bar(true)
+
+# Concurrent simulators speeds things up
+concurrent_simulators(true)

@@ -1,0 +1,27 @@
+# Gymfile — configuration for `fastlane gym` / `build_app`
+# Docs: https://docs.fastlane.tools/actions/gym/
+
+project("Pizza Man.xcodeproj")
+scheme("Pizza Man")
+configuration("Release")
+
+# Distribution method for the App Store
+export_method("app-store")
+
+# Where built artifacts are written
+output_directory("./build")
+output_name("Pizza Man.ipa")
+
+# Clean before building
+clean(true)
+
+# Use Xcode automatic signing (the team is set in the project file)
+export_options({
+  signingStyle: "automatic",
+  teamID: "8Q693ZG5RN"
+})
+
+# Allow xcodebuild to fetch / create distribution profiles automatically.
+# Required for App Store export under automatic signing.
+xcargs("-allowProvisioningUpdates")
+export_xcargs("-allowProvisioningUpdates")
