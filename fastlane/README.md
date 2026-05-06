@@ -39,6 +39,8 @@ Bump only the build number (used before each beta upload)
 
 Generate App Store screenshots
 
+Pass `locales:en-US,fr-FR` or `devices:"iPhone 16 Pro"` to filter.
+
 ### ios upload_screenshots
 
 ```sh
@@ -54,6 +56,14 @@ Upload local screenshots to the editable App Store version
 ```
 
 Generate screenshots and upload them to App Store Connect
+
+### ios full_release
+
+```sh
+[bundle exec] fastlane ios full_release
+```
+
+Full pipeline: bump_version, beta, screenshots, upload_screenshots, release. Pass notes:'...'
 
 ### ios beta
 
@@ -77,7 +87,7 @@ Build the signed release .ipa without uploading (for testing the build pipeline)
 [bundle exec] fastlane ios release
 ```
 
-Full App Store release: capture screenshots, attach the latest TestFlight build, submit for review
+Submit the latest TestFlight build for App Store review
 
 ### ios submit_only
 

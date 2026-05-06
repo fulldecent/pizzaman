@@ -50,9 +50,12 @@ platform :ios do
     set_info_plist_value(path: PLIST, key: "CFBundleVersion", value: (current + 1).to_s)
   end
 
-  desc "Generate App Store screenshots"
-  lane :screenshots do
-    capture_screenshots
+  desc "Generate App Store screenshots. Pass locales:en-US,fr-FR or devices:'iPhone 16 Pro' to filter"
+  lane :screenshots do |options|
+    args = {}
+    args[:languages] = options[:locales].to_s.split(",").map(&:strip).reject(&:empty?) if options[:locales]
+    args[:devices] = options[:devices].to_s.split(",").map(&:strip).reject(&:empty?) if options[:devices]
+    capture_screenshots(args)
   end
 
   desc "Upload local screenshots to the editable App Store version"
@@ -61,9 +64,18 @@ platform :ios do
   end
 
   desc "Generate screenshots and upload them to App Store Connect"
-  lane :screenshots_and_upload do
-    capture_screenshots
+  lane :screenshots_and_upload do |options|
+    screenshots(options)
     upload_to_app_store
+  end
+
+  desc "Full pipeline: bump_version, beta, screenshots, upload_screenshots, release. Pass notes:'...'"
+  lane :full_release do |options|
+    bump_version(bump: options[:bump] || "patch")
+    beta
+    screenshots(options)
+    upload_screenshots
+    release(notes: options[:notes])
   end
 
   desc "Build a signed release .ipa, upload it to TestFlight, then bump the build number for next time"
@@ -97,7 +109,7 @@ platform :ios do
     )
   end
 
-  desc "Full App Store release: capture screenshots, attach the latest TestFlight build, submit for review"
+  desc "Submit the latest TestFlight build for App Store review"
   lane :release do |options|
     notes = options[:notes]
     if notes.nil? || notes.strip.empty?
@@ -105,11 +117,10 @@ platform :ios do
     end
     UI.user_error!("Release notes are required to submit for review") if notes.nil? || notes.strip.empty?
 
-    capture_screenshots
     upload_to_app_store(
       skip_binary_upload: true,
       skip_metadata: false,
-      skip_screenshots: false,
+      skip_screenshots: true,
       release_notes: { "en-US" => notes },
       submit_for_review: true,
       automatic_release: true,
