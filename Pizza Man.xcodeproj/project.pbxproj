@@ -500,7 +500,7 @@
 				CURRENT_PROJECT_VERSION = 4;
 				INFOPLIST_FILE = PizzaMan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 4.0.1; /* x-release-please-version */
+				MARKETING_VERSION = 4.0.2; /* x-release-please-version */
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -521,7 +521,7 @@
 				CURRENT_PROJECT_VERSION = 4;
 				INFOPLIST_FILE = PizzaMan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 4.0.1; /* x-release-please-version */
+				MARKETING_VERSION = 4.0.2; /* x-release-please-version */
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
