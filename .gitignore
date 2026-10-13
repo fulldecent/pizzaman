@@ -79,7 +79,7 @@ Dependencies/
 
 fastlane/report.xml
 fastlane/Preview.html
-fastlane/screenshots/**/*.png
+fastlane/screenshots/
 fastlane/test_output
 fastlane/api_key.json
 
@@ -92,3 +92,8 @@ iOSInjectionProject/
 
 # Mac
 .DS_Store
+*.p8
+*.p12
+vendor/bundle/
+.bundle/
+.env

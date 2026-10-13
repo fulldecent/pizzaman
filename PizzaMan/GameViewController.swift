@@ -6,31 +6,31 @@
 //  Copyright © 2017 William Entriken. All rights reserved.
 //
 
-import UIKit
-import SpriteKit
 import GameplayKit
+import SpriteKit
+import UIKit
 
 class GameViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let skView = SKView(frame: self.view.frame)
-        self.view.addSubview(skView)
-        let scene = GameScene(size: self.view.frame.size)
-        scene.viewController = self
-        skView.presentScene(scene)
-    }
+  override func viewDidLoad() {
+    super.viewDidLoad()
 
-    override var shouldAutorotate: Bool {
-        return false
-    }
+    let skView = SKView(frame: self.view.frame)
+    self.view.addSubview(skView)
+    let scene = GameScene(size: self.view.frame.size)
+    scene.viewController = self
+    skView.presentScene(scene)
+  }
 
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
-    }
+  override var shouldAutorotate: Bool {
+    return false
+  }
 
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
+  override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+    return .portrait
+  }
+
+  override var prefersStatusBarHidden: Bool {
+    return true
+  }
 }
