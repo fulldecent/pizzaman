@@ -437,6 +437,7 @@ def prepare_metadata!(metadata_path, notes)
       target = File.join(directory, filename)
       next if File.file?(target) && !File.read(target).strip.empty?
       fallback = File.join(source, filename)
+      next if File.expand_path(fallback) == File.expand_path(target)
       FileUtils.cp(fallback, target) if File.file?(fallback)
     end
     File.write(File.join(directory, "release_notes.txt"), "#{notes}\n")
