@@ -8,11 +8,10 @@
 
 import UIKit
 
-class LocalPlayer
-{
-    static let sharedInstance = LocalPlayer()
-    var gameKitViewController: UIViewController?
-    
-    private init() {
-    }
+class LocalPlayer {
+  static let sharedInstance = LocalPlayer()
+  var gameKitViewController: UIViewController?
+
+  private init() {
+  }
 }
