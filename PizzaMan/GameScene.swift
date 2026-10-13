@@ -83,7 +83,12 @@ class GameScene: SKScene {
     self.addChild(cameraNode)
     self.camera = cameraNode
 
-    switchToInstructionState()
+    if ProcessInfo.processInfo.arguments.contains("-screenshotPlay") {
+      switchToPlayingState()
+      launchNewTopping()
+    } else {
+      switchToInstructionState()
+    }
   }
 
   func switchToInstructionState() {

@@ -325,12 +325,13 @@ def require_simulator(names, platform_name)
   UI.user_error!("No available #{platform_name} simulator found for #{names.join(" or ")}")
 end
 
-def launch_args(language, apple_locale, screenshot)
-  # The second store shot is the chart page. MainView reads -viewMode.
-  # -AppleLanguages does not change Locale.current in a Mac process that was
-  # launched directly. The app reads -AppleLocale itself.
-  mode = screenshot ? "chart" : "formant"
-  ["-viewMode", mode, "-AppleLanguages", "(#{language})", "-AppleLocale", apple_locale]
+def launch_args(language, apple_locale, second_shot)
+  # The first store shot is the how-to. The second is a game in progress.
+  # GameScene reads -screenshotPlay. -FASTLANE_SNAPSHOT skips the Game Center
+  # sign-in sheet, which AppDelegate already honors.
+  args = ["-AppleLanguages", "(#{language})", "-AppleLocale", apple_locale, "-FASTLANE_SNAPSHOT", "YES"]
+  args << "-screenshotPlay" if second_shot
+  args
 end
 
 def capture_simulator_shot!(udid, screenshot, destination, language, apple_locale)

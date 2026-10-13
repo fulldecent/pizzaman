@@ -61,9 +61,7 @@ This follows [swift-app-template](https://github.com/fulldecent/swift-app-templa
    * `APP_STORE_CONNECT_KEY`
    * `APP_STORE_DISTRIBUTION_P12`
    * `APP_STORE_DISTRIBUTION_P12_PASSWORD`
-   * `APP_STORE_MAC_INSTALLER_P12`
-   * `APP_STORE_MAC_INSTALLER_P12_PASSWORD`
 
-The workflow creates the provisioning profile at build time. The upload job also imports the Mac installer certificate, even though this app does not ship a Mac build.
+The workflow creates the iOS provisioning profile at build time.
 
 App Privacy, and whether the app uses the Advertising Identifier, stay in App Store Connect. fastlane sends the encryption answer and the third-party content answer.
