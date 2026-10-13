@@ -1,6 +1,8 @@
 
 # Pizza-Man
 
+[![Build and test](https://github.com/fulldecent/pizzaman/actions/workflows/build-test.yml/badge.svg)](https://github.com/fulldecent/pizzaman/actions/workflows/build-test.yml) [![Lint](https://github.com/fulldecent/pizzaman/actions/workflows/lint.yml/badge.svg)](https://github.com/fulldecent/pizzaman/actions/workflows/lint.yml)
+
 Get in on the App Store: <https://apps.apple.com/us/app/pizza-man/id931174800>
 
 The iOS game
@@ -48,8 +50,6 @@ Store text lives in [fastlane/metadata](fastlane/metadata). Screenshots are gene
 
 Release Please opens its pull request as `github-actions`. GitHub holds those checks until a person approves the workflow run.
 
-This follows [swift-app-template](https://github.com/fulldecent/swift-app-template) release 1.1.0 and the release workflow used by [8 Ball Answer](https://github.com/fulldecent/8-ball-answer).
-
 ### Setup
 
 1. GitHub repo > Settings > Actions > General > Workflow permissions: Read and write permissions. Check "Allow GitHub Actions to create and approve pull requests".
@@ -65,3 +65,7 @@ This follows [swift-app-template](https://github.com/fulldecent/swift-app-templa
 The workflow creates the iOS provisioning profile at build time.
 
 App Privacy, and whether the app uses the Advertising Identifier, stay in App Store Connect. fastlane sends the encryption answer and the third-party content answer.
+
+## References
+
+1. This project is built based on [best practices documented in swift-app-template](https://github.com/fulldecent/swift-app-template), release 1.1.0. The [build-and-test workflow](.github/workflows/build-test.yml), the [lint workflow](.github/workflows/lint.yml), and the [release workflow](.github/workflows/release.yml) are that release's three files. [8 Ball Answer](https://github.com/fulldecent/8-ball-answer) is where the template's upload rules were confirmed. This app ships iOS only. There is no Mac target and no `APP_STORE_MAC_INSTALLER_P12` secret. The template's sample app ships iOS and macOS.
