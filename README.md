@@ -69,3 +69,4 @@ App Privacy, and whether the app uses the Advertising Identifier, stay in App St
 ## References
 
 1. This project is built based on [best practices documented in swift-app-template](https://github.com/fulldecent/swift-app-template), release 1.1.0. The [build-and-test workflow](.github/workflows/build-test.yml), the [lint workflow](.github/workflows/lint.yml), and the [release workflow](.github/workflows/release.yml) are that release's three files. [8 Ball Answer](https://github.com/fulldecent/8-ball-answer) is where the template's upload rules were confirmed. This app ships iOS only. There is no Mac target and no `APP_STORE_MAC_INSTALLER_P12` secret. The template's sample app ships iOS and macOS.
+2. This project is all rights reserved by William Entriken. See [LICENSE.md](LICENSE.md).
